@@ -202,6 +202,34 @@
 
     <div class="post-preview">
 
+        <a href="/2021/05/11/Redis/Redis相关知识----缓存问题/">
+            <h2 class="post-title">
+                Redis相关知识----缓存问题
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本文介绍Redis缓存相关问题，包括缓存穿透、缓存击穿、缓存雪崩等相关知识
+
+缓存穿透：缓存穿透是指缓存和数据库中都没有的数据，而用户不断发起请求，这将导致这个不存在的数据每次请求都要到存储层去查询，失去了缓存的意义。当流量过大时，数据库可能挂掉。
+解决方案：
+
+用户校验：接口层增加校验，如用户鉴权校验，id做基础校验，id&lt;=0的直接拦截；
+对空值缓存：从缓存取不到的数据，在数据库......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-05-11
+        </p>
+
+    </div>
+    <hr>
+    
+    <div class="post-preview">
+
         <a href="/2021/04/30/Shuyou/最近一些想法/">
             <h2 class="post-title">
                 最近一些想法
@@ -451,44 +479,6 @@ ACID:
     </div>
     <hr>
     
-    <div class="post-preview">
-
-        <a href="/2021/04/13/Mysql/Mysql相关知识(四)/">
-            <h2 class="post-title">
-                Mysql相关知识（四）
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍Mysql中explain相关知识
-
-explain:当mysql的查询语句执行较慢时，可以通过使用explain命令解释mysql语句，通过结果分析mysql语句执行慢的原因，来优化mysql语句。
-expain出来的信息有10列：
-
-id
-select_type
-table
-type
-possible_keys
-key
-key_len
-ref
-rows
-Extra
-
-id：SQ......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-04-13
-        </p>
-
-    </div>
-    <hr>
-    
 
 
         <!-- Pager -->
@@ -566,7 +556,7 @@ id：SQ......
                                             
                                     
                                         <a href="/tags/#Redis" title="Redis"
-                                            rel="6">
+                                            rel="7">
                                             Redis
                                         </a>
                                         
