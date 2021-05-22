@@ -86,3 +86,4 @@ zsy@zsy:~/redis/testSlave$
 
 **参考：**
 [docker-compose搭建redis哨兵集群](https://www.cnblogs.com/JulianHuang/p/12650721.html)
+[使用docker 搭建redis的主从复制](https://cloud.tencent.com/developer/article/1693904)
