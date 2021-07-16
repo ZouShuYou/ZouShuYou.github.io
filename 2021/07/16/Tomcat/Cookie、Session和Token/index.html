@@ -13,11 +13,11 @@
 
     <title>
         
-          道阻且长 行则将至 - ShuYou&#39;s Blog
+          Cookie、Session和Token相关知识 - ShuYou&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://shuyou.site/2021/07/03/Shuyou/如题/">
+    <link rel="canonical" href="https://shuyou.site/2021/07/16/Tomcat/Cookie、Session和Token/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -178,14 +178,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#记录" title="记录">记录</a>
+                          <a class="tag" href="/tags/#tomcat" title="tomcat">tomcat</a>
                         
                     </div>
-                    <h1>道阻且长 行则将至</h1>
+                    <h1>Cookie、Session和Token相关知识</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
-                        Posted by shu you on
-                        2021-07-03
+                        Posted by Zsy on
+                        2021-07-16
                     </span>
                 </div>
             </div>
@@ -204,18 +204,36 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>最近一直都没写博客，是因为来北京出差了，在中信建投这边做项目，很累，没什么时间写。</p>
-<p>都连续4个周末全加班了，很累，估计年底要辞职回家了。希望下半年不用来这边做二期的项目。</p>
-<p>很累但是又感觉啥都没做，这种状态是很可怕的。很多时候还是很烦躁，怕生，焦虑，但是能感觉到比以前的状态好多了。</p>
-<p>记录下最近的想法：</p>
+                <blockquote>
+<p>本文介绍Cookie、Session和Token相关知识</p>
+</blockquote>
+<p><strong>什么是Cookie</strong></p>
+<p>由于Http是无状态的协议，这意味着一旦数据提交后，客户端与服务器的连接就会关闭，再次交互的时候需要重新建立新的连接。</p>
+<p>服务器无法确认用户信息，于是W3C就提出给每个用户发一个通行证，无论谁访问都携带通行证，这样服务器就能从通行证上确认用户信息，这个通行证就是cookie。</p>
 <ul>
-<li>要保持乐观的心态，积极向上的人生态度</li>
-<li>多与人交流，别怕生</li>
-<li>不要为过去的事情烦恼，多思考未来</li>
-<li>做事情要专注，努力去做想做的事</li>
-<li>要学会找到正确的方法，多观察，多思考</li>
-<li>了解更多的事，多听，多看，停止事不关己的懒惰</li>
-<li>多经营自己的人生，少羡慕别人</li>
+<li>cookie存储在客户端：cookie 是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上。</li>
+<li>cookie是不可跨域的： 每个 cookie 都会绑定单一的域名，无法在别的域名下获取使用，一级域名和二级域名之间是允许共享使用的（靠的是 domain）。</li>
+</ul>
+<p>在servlet中使用cookie</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">response.setContentType(<span class="string">&quot;text/html;charset=UTF-8&quot;</span>);</span><br><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">&quot;user&quot;</span>,<span class="string">&quot;zsy&quot;</span>);</span><br><span class="line">cookie.setMaxAge(<span class="number">30000</span>);</span><br><span class="line">response.addCookie(cookie);</span><br><span class="line">response.getWriter().write(<span class="string">&quot;返回Cookie&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>什么是Session</strong></p>
+<p>Session 是另⼀种记录浏览器状态的机制。Cookie保存在浏览器中， 而Session保存在服务器中。⽤户使⽤浏览器访问服务器的时候，服务器把⽤户的信息以某种的形式记录在服务器，这就是Session。</p>
+<ul>
+<li>Session可以存储任何类型的数据，而Cookie只能存字符串</li>
+<li>Session存在服务器，Cookie存在客户端浏览器上</li>
+<li>Session是基于Cookie实现的，依赖于名为JSESSIONID的Cookie</li>
+<li>Cookie 可设置为长时间保持，比如我们经常使用的默认登录功能，Session 一般失效时间较短，客户端关闭（默认情况下）或者 Session 超时都会失效</li>
+</ul>
+<p>在servlet中使用session</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//得到Session对象</span></span><br><span class="line">HttpSession httpSession = request.getSession();</span><br><span class="line"><span class="comment">//设置Session属性</span></span><br><span class="line">httpSession.setAttribute(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;看完博客就要点赞！！ &quot;</span>);</span><br><span class="line"><span class="comment">//得到Session对象</span></span><br><span class="line">HttpSession httpSession = request.getSession();</span><br><span class="line"><span class="comment">//设置Session属性</span></span><br><span class="line">httpSession.setAttribute(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;看完博客就要点赞！！ &quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>什么是Token</strong></p>
+<p>token是访问资源接口（API）时所需要的资源凭证</p>
+<ul>
+<li>每一次请求都需要携带 token，需要把 token 放到 HTTP 的 Header 里</li>
+<li>基于 token 的用户认证是一种服务端无状态的认证方式，服务端不用存放 token 数据。用解析 token 的计算时间换取 session 的存储空间，从而减轻服务器的压力，减少频繁的查询数据库</li>
+<li>使用JWT（Json Web Token）可以解决跨域相关问题</li>
 </ul>
 
 
@@ -225,13 +243,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2021/07/16/Tomcat/Cookie、Session和Token/" data-toggle="tooltip" data-placement="top" title="Cookie、Session和Token相关知识">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2021/05/14/JVM/Java内存模型/" data-toggle="tooltip" data-placement="top" title="Java内存模型">Next Post &rarr;</a>
+                            <a href="/2021/07/03/Shuyou/如题/" data-toggle="tooltip" data-placement="top" title="道阻且长 行则将至">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -258,7 +272,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#记录" title="记录">记录</a>
+                          <a class="tag" href="/tags/#tomcat" title="tomcat">tomcat</a>
                         
                     </div>
                 </section>
