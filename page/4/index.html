@@ -98,16 +98,16 @@
                     
                         
                             <li>
-                                <a href="/tags/">
-                                    Tags
+                                <a href="/archives/">
+                                    Archives
                                 </a>
                             </li>
                         
                     
                         
                             <li>
-                                <a href="/archives/">
-                                    Archives
+                                <a href="/tags/">
+                                    Tags
                                 </a>
                             </li>
                         
@@ -200,6 +200,30 @@
                     <!-- Main Content -->
 
 
+    <div class="post-preview">
+
+        <a href="/2021/03/05/Java Concurrent/ThreadLocal/">
+            <h2 class="post-title">
+                深入了解ThreadLocal
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本文分析ThreadLocal的原理和使用
+
+1.ThreadLocal简介多线程访问共享变量时容易出现并发问题，为了保证线程安全，一般会给共享变量进行适当的加锁同步。如果不想加锁呢？ThreadLocal可以做到线程隔离，多个线程访问共享变量时，访问的是自己线程的变量。ThreadLocal提供了线程本地变量，如果创建了一个ThreadLocal变量，那么访问这个变量的每个线程都会有这个......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-03-05
+        </p>
+
+    </div>
+    <hr>
+    
     <div class="post-preview">
 
         <a href="/2021/03/03/Java Base/ConcurrentHashMap/">
@@ -439,10 +463,12 @@ github地址
                                             
                                     
                                         <a href="/tags/#Java并发" title="Java并发"
-                                            rel="6">
+                                            rel="7">
                                             Java并发
                                         </a>
                                         
+                                            
+                                    
                                             
                                     
                                         <a href="/tags/#Mysql" title="Mysql"
@@ -450,8 +476,6 @@ github地址
                                             Mysql
                                         </a>
                                         
-                                            
-                                    
                                             
                                     
                                         <a href="/tags/#Redis" title="Redis"
@@ -475,15 +499,15 @@ github地址
                                         
                                             
                                     
+                                            
+                                    
+                                            
+                                    
                                         <a href="/tags/#Spring AOP" title="Spring AOP"
                                             rel="2">
                                             Spring AOP
                                         </a>
                                         
-                                            
-                                    
-                                            
-                                    
                                             
                             </div>
                         </section>
