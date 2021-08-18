@@ -98,16 +98,16 @@
                     
                         
                             <li>
-                                <a href="/archives/">
-                                    Archives
+                                <a href="/tags/">
+                                    Tags
                                 </a>
                             </li>
                         
                     
                         
                             <li>
-                                <a href="/tags/">
-                                    Tags
+                                <a href="/archives/">
+                                    Archives
                                 </a>
                             </li>
                         
@@ -200,6 +200,31 @@
                     <!-- Main Content -->
 
 
+    <div class="post-preview">
+
+        <a href="/2021/03/10/Java Concurrent/ReentrantReadWriteLock/">
+            <h2 class="post-title">
+                深入了解ReentrantReadWriteLock
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本文分析JDK1.8中的ReentrantReadWriteLock类
+
+简介由于ReentrantLock是独占锁，某时只有一个线程可以获取该锁，而实际中会有写少读多的场景，所以ReentrantReadWriteLock应运而生，采用读写分离的策略，允许多个线程同时获取该锁。
+ReentrantReadWriteLock即可重入读写锁，内部维护一个ReadLock和一个WriteLoc......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-03-10
+        </p>
+
+    </div>
+    <hr>
+    
     <div class="post-preview">
 
         <a href="/2021/03/08/Java Concurrent/Java并发基础/">
@@ -501,13 +526,6 @@ github地址
                                     
                                             
                                     
-                                        <a href="/tags/#Mysql" title="Mysql"
-                                            rel="5">
-                                            Mysql
-                                        </a>
-                                        
-                                            
-                                    
                                         <a href="/tags/#Redis" title="Redis"
                                             rel="6">
                                             Redis
@@ -515,8 +533,15 @@ github地址
                                         
                                             
                                     
+                                        <a href="/tags/#Mysql" title="Mysql"
+                                            rel="5">
+                                            Mysql
+                                        </a>
+                                        
+                                            
+                                    
                                         <a href="/tags/#记录" title="记录"
-                                            rel="4">
+                                            rel="5">
                                             记录
                                         </a>
                                         
