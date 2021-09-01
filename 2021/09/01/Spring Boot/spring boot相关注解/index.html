@@ -13,11 +13,11 @@
 
     <title>
         
-          ShuYou&#39;s Blog
+          Spring Boot mvc开发相关注解 - ShuYou&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://shuyou.site/404.html">
+    <link rel="canonical" href="https://shuyou.site/2021/09/01/Spring Boot/spring boot相关注解/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -161,18 +161,31 @@
 
     <!-- Main Content -->
     
-<!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+<!-- Image to hack wechat -->
+<!-- <img src="https://shuyou.site/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>
-                        ShuYou&#39;s Blog
-                    </h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">
-                        我不知道去何方，但我已经在路上。
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Spring boot" title="Spring boot">Spring boot</a>
+                        
+                    </div>
+                    <h1>Spring Boot mvc开发相关注解</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Zsy on
+                        2021-09-01
                     </span>
                 </div>
             </div>
@@ -180,205 +193,155 @@
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>本文介绍Spring Boot开发web相关注解知识</p>
+</blockquote>
+<h5 id="基础web注解"><a href="#基础web注解" class="headerlink" title="基础web注解"></a>基础web注解</h5><p><strong>Bean处理</strong></p>
+<ul>
+<li>@Component：通用的注解，可标注任意类为 Spring 组件。如果一个 Bean 不知道属于哪个层，可以使用@Component 注解标注；</li>
+<li>@Repository：对应持久层即 Dao 层，主要用于数据库相关操作；</li>
+<li>@Service：对应服务层，主要涉及一些复杂的逻辑，需要用到 Dao 层；</li>
+<li>@Controller：对应 Spring MVC 控制层，一般需要注入 Service 类返回结果数据；</li>
+<li>@RestController：继承于 @Controller，区别在于标注后整个类所有方法将直接返回 JSON 数据，不再需要视图解析处理，目前前后端分离的项目后端都是直接用这个注解的；</li>
+<li>@Configuration：标注是 Java 代码的配置类， Spring Boot 中推荐这种做法不再使用 xml 配置了；</li>
+<li>@Scope：声明 Spring Bean 的作用域,作用于一共有以下几种：<ul>
+<li>singleton：唯一 bean 实例，Spring 中的 bean 默认都是单例的。</li>
+<li>prototype：每次请求都会创建一个新的 bean 实例。</li>
+<li>request：每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP request 内有效。</li>
+<li>session：每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP session 内有效。</li>
+</ul>
+</li>
+</ul>
+<p><strong>HTTP请求</strong></p>
+<ul>
+<li>@RequestMapping：@RequestMapping(value=”/test”,method=RequestMethod.GET)可以指定路径和请求方法</li>
+<li>@GetMapping：get请求注解</li>
+<li>@PostMapping：post请求注解</li>
+<li>@PutMapping</li>
+<li>@DeleteMapping</li>
+</ul>
+<p><strong>前后端参数传递</strong></p>
+<ul>
+<li>@RequestParam：用在方法的参数前面，获取请求中表单类型的key=value格式的数据。</li>
+<li>@PathVariable：用于获取请求路径中的参数。</li>
+<li>@RequestBody：获取请求 body 中的数据，常用于搭配 @PostMapping 请求来提交对象数据.  请求体 的Content-Type 必须为 application/json 格式的数据，接收到数据之后会自动将数据绑定到 Java 对象上去。系统会使用 HttpMessageConverter 或者自定义的 HttpMessageConverter将请求的 body 中的 json 字符串转换为 java 对象。</li>
+<li>@ResponseBody：表示该方法的返回结果直接写入 HTTP response body 中，格式为 json。上面我们提到的 @RestController 其实就是 @Controller 和 @ResponseBody 两个结合起来的。</li>
+</ul>
+<p><strong>读取配置</strong></p>
+<ul>
+<li>@value：可以在任意 Spring 管理的 Bean 中通过这个注解获取任何来源配置的属性值。</li>
+<li>@ConfigurationProperties：指定该类是配置类，且可以指定配置前缀</li>
+<li>@PropertySource：定读取我们自定义的配置文件的。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix= &quot;my&quot; )</span></span><br><span class="line"><span class="meta">@PropertySource(value = &#123;&quot;classpath:my.properties&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyProperties</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxValue= <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数校验</strong></p>
+<ul>
+<li>@NotEmpty 被注释的字符串的不能为 null 也不能为空</li>
+<li>@NotBlank 被注释的字符串非 null，并且必须包含一个非空白字符</li>
+<li>@Null 被注释的元素必须为 null</li>
+<li>@NotNull 被注释的元素必须不为 null</li>
+<li>@AssertTrue 被注释的元素必须为 true</li>
+<li>@AssertFalse 被注释的元素必须为 false</li>
+<li>@Pattern(regex=,flag=)被注释的元素必须符合指定的正则表达式</li>
+<li>@Email 被注释的元素必须是 Email 格式。</li>
+<li>@Min(value)被注释的元素必须是一个数字，其值必须大于等于指定的最小值</li>
+<li>@Max(value)被注释的元素必须是一个数字，其值必须小于等于指定的最大值</li>
+<li>@DecimalMin(value)被注释的元素必须是一个数字，其值必须大于等于指定的最小值</li>
+<li>@DecimalMax(value) 被注释的元素必须是一个数字，其值必须小于等于指定的最大值</li>
+<li>@Size(max=, min=)被注释的元素的大小必须在指定的范围内</li>
+<li>@Digits (integer, fraction)被注释的元素必须是一个数字，其值必须在可接受的范围内</li>
+<li>@Past被注释的元素必须是一个过去的日期</li>
+<li>@Future 被注释的元素必须是一个将来的日期</li>
+</ul>
+<p>只需要在请求处理方法中需要验证的参数前加上 @Valid 注解就会开启校验了，如果验证失败将抛出异常：MethodArgumentNotValidException。</p>
+<ul>
+<li>@Validated：如果你的入参不是用一个 Java 对象来接收的话，比如用 @PathVariables 和 @RequestParam 注解来获取入参，这种情况下要校验参数不要忘记在类的头上加 @Validated 注解，这个参数可以告诉 Spring 去校验方法参数。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/user&quot;)</span></span><br><span class="line"><span class="meta">@Validated</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"><span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;List&lt;User&gt;&gt; findById( <span class="meta">@PathVariable</span> <span class="meta">@Max(value = 5,message = &quot;超过 id 的范围了&quot;)</span> <span class="keyword">long</span> id) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity(userService.findById(id),HttpStatus.OK);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>统一异常处理</strong></p>
+<ul>
+<li>@ControllerAdvice：定义全局异常处理类，包含 @Component 所以可以被 Spring 扫描到。</li>
+<li>@ExceptionHandler : 声明异常处理方法，表示遇到这个异常，就执行标注的方法。</li>
+</ul>
+<p><strong>配置启动</strong></p>
+<ul>
+<li>@SpringBootApplication：等价于使用 @Configuration、@EnableAutoConfiguration、@ComponentScan  三个注解。</li>
+<li>@Configuration：声明是是一个 Java 形式的配置类，Spring Boot 提倡基于 Java 的配置，相当于你之前在 xml 中配置 bean；</li>
+<li>@EnableConfigurationProperties： 指定配置类，并使配置类生效</li>
+<li>@ComponentScan：标注哪些路径下的类需要被Spring扫描。</li>
+<li>@Conditional：Spring4 新提供的注解，通过 @Conditional 注解可以根据代码中设置的条件装载不同的 bean，也是SpringBoot实现自动配置的基石。</li>
+</ul>
 
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2021/08/31/Spring Boot/spring boot自动配置/" data-toggle="tooltip" data-placement="top" title="Spring Boot自动配置相关知识">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+    <!-- Side Catalog Container -->
         
 
-                <!-- USE SIDEBAR -->
-                <!-- Post Container -->
-                <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+    <!-- Sidebar Container -->
 
-                    
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-                        <!-- 如果开启评论功能 -->
-                        
-                            <hr>
-
-                            
-
-                                    
-
-
-                                            
-
-                                                    
-
-
-
-                                                            
-
-                </div>
-                <!-- Sidebar Container -->
-                <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-                    <!-- Featured Tags -->
-                    
-                        <section>
-                            <!-- no hr -->
-                            <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                            <div class="tags">
-                                
-                                    
-                                        <a href="/tags/#算法" title="算法"
-                                            rel="2">
-                                            算法
-                                        </a>
-                                        
-                                            
-                                    
-                                            
-                                    
-                                        <a href="/tags/#JVM" title="JVM"
-                                            rel="4">
-                                            JVM
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#Java集合" title="Java集合"
-                                            rel="4">
-                                            Java集合
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#Java并发" title="Java并发"
-                                            rel="7">
-                                            Java并发
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#Mysql" title="Mysql"
-                                            rel="5">
-                                            Mysql
-                                        </a>
-                                        
-                                            
-                                    
-                                            
-                                    
-                                        <a href="/tags/#Redis" title="Redis"
-                                            rel="6">
-                                            Redis
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#记录" title="记录"
-                                            rel="5">
-                                            记录
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#Spring" title="Spring"
-                                            rel="4">
-                                            Spring
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#Spring boot" title="Spring boot"
-                                            rel="2">
-                                            Spring boot
-                                        </a>
-                                        
-                                            
-                                    
-                                            
-                                    
-                                        <a href="/tags/#Spring AOP" title="Spring AOP"
-                                            rel="2">
-                                            Spring AOP
-                                        </a>
-                                        
-                                            
-                                    
-                                            
-                            </div>
-                        </section>
-                        
-
-                            <!-- Short About -->
-                            <section class="visible-md visible-lg">
-                                <hr>
-                                <h5><a href="/about/">ABOUT ME</a></h5>
-                                <div class="short-about">
-
-                                    
-                                        <img src="/img/me.jpg" />
-                                        
-
-                                            
-                                                <p>
-                                                    花有重开日，人无再少年。
-                                                </p>
-                                                
-
-                                                    <!-- SNS Link -->
-                                                    <ul class="list-inline">
-                                                        
-                                                                
-                                                                        
-                                                                            <li>
-                                                                                <a target="_blank"
-                                                                                    href="https://www.zhihu.com/people/ZouShuYou">
-                                                                                    <span class="fa-stack fa-lg">
-                                                                                        <i
-                                                                                            class="fa fa-circle fa-stack-2x"></i>
-                                                                                        <i
-                                                                                            class="fa  fa-stack-1x fa-inverse">知</i>
-                                                                                    </span>
-                                                                                </a>
-                                                                            </li>
-                                                                            
-
-                                                                                
-
-                                                                                        
-
-                                                                                                
-                                                                                                    <li>
-                                                                                                        <a target="_blank"
-                                                                                                            href="https://github.com/ZouShuYou">
-                                                                                                            <span
-                                                                                                                class="fa-stack fa-lg">
-                                                                                                                <i
-                                                                                                                    class="fa fa-circle fa-stack-2x"></i>
-                                                                                                                <i
-                                                                                                                    class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                                                                                            </span>
-                                                                                                        </a>
-                                                                                                    </li>
-                                                                                                    
-
-
-                                                                                                        
-                                                    </ul>
-                                </div>
-                            </section>
-
-                            <!-- Friends Blog -->
-                            
-                </div>
+                <!-- Featured Tags -->
                 
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Spring boot" title="Spring boot">Spring boot</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+
+
+
+
 
     <!-- Footer -->
     <!-- Footer -->
