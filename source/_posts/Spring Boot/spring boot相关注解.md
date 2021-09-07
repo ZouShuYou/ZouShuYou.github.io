@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Spring Boot mvc开发相关注解"
+title:      "Spring Boot相关注解"
 date:       2021-9-1
 author:     "Zsy"
 tags:
