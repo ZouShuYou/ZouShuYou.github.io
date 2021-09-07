@@ -95,19 +95,19 @@
                         
                     
                         
-                    
-                        
                             <li>
-                                <a href="/tags/">
-                                    Tags
+                                <a href="/archives/">
+                                    Archives
                                 </a>
                             </li>
                         
                     
                         
+                    
+                        
                             <li>
-                                <a href="/archives/">
-                                    Archives
+                                <a href="/tags/">
+                                    Tags
                                 </a>
                             </li>
                         
@@ -200,6 +200,31 @@
                     <!-- Main Content -->
 
 
+    <div class="post-preview">
+
+        <a href="/2021/03/16/Algorithm/缓存淘汰算法/">
+            <h2 class="post-title">
+                FIFO、LRU、LFU三种缓存淘汰算法
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本文介绍三种常用缓存淘汰算法，即它们的简单实现。
+
+简介缓存，就是将程序或系统经常要调用的对象存在内存中，再次调用时可以快速从内存中获取对象，不必再去创建新的重复的实例。当缓存中的数据太多超过一定值时，通常会采取一些缓存淘汰算法进行处理。
+FIFO（先进先出）FIFO即先进先出算法，队列也具有先进先出的性质，所以可以考虑采用LinkedList实现FIFO算法。但是只用LinkedList......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-03-16
+        </p>
+
+    </div>
+    <hr>
+    
     <div class="post-preview">
 
         <a href="/2021/03/16/Java Base/LinkedHashMap/">
@@ -442,30 +467,6 @@ github地址
     </div>
     <hr>
     
-    <div class="post-preview">
-
-        <a href="/2021/01/11/Spring/Spring AOP/Spring AOP使用/">
-            <h2 class="post-title">
-                Spring AOP的初步使用
-            </h2>
-            <h3 class="post-subtitle">
-                      （二）       
-            </h3>
-            <div class="post-content-preview">
-                
-“初步了解和使用SPRING AOP”
-
-一、JDK 动态代理的使用1.Food  目标接口123456789101112131415161718package proxy;/** * @author zsy * @version v1.0 * @Description * @date 2020-09-23 15:50 */public interface Food &#123;    /......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-01-11
-        </p>
-
-    </div>
-    <hr>
-    
 
 
         <!-- Pager -->
@@ -503,15 +504,6 @@ github地址
                             <div class="tags">
                                 
                                     
-                                        <a href="/tags/#算法" title="算法"
-                                            rel="2">
-                                            算法
-                                        </a>
-                                        
-                                            
-                                    
-                                            
-                                    
                                         <a href="/tags/#JVM" title="JVM"
                                             rel="4">
                                             JVM
@@ -519,9 +511,11 @@ github地址
                                         
                                             
                                     
-                                        <a href="/tags/#Java集合" title="Java集合"
-                                            rel="4">
-                                            Java集合
+                                            
+                                    
+                                        <a href="/tags/#算法" title="算法"
+                                            rel="2">
+                                            算法
                                         </a>
                                         
                                             
@@ -533,6 +527,8 @@ github地址
                                         
                                             
                                     
+                                            
+                                    
                                         <a href="/tags/#Mysql" title="Mysql"
                                             rel="5">
                                             Mysql
@@ -540,6 +536,11 @@ github地址
                                         
                                             
                                     
+                                        <a href="/tags/#Java集合" title="Java集合"
+                                            rel="4">
+                                            Java集合
+                                        </a>
+                                        
                                             
                                     
                                         <a href="/tags/#Redis" title="Redis"
@@ -564,7 +565,7 @@ github地址
                                             
                                     
                                         <a href="/tags/#Spring boot" title="Spring boot"
-                                            rel="2">
+                                            rel="3">
                                             Spring boot
                                         </a>
                                         

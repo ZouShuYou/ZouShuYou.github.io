@@ -13,11 +13,11 @@
 
     <title>
         
-          Spring Boot相关注解 - ShuYou&#39;s Blog
+          Spring Boot中操作JSON - ShuYou&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://shuyou.site/2021/09/01/Spring Boot/spring boot相关注解/">
+    <link rel="canonical" href="https://shuyou.site/2021/09/07/Spring Boot/spring boot中的JSON/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -181,11 +181,11 @@
                           <a class="tag" href="/tags/#Spring boot" title="Spring boot">Spring boot</a>
                         
                     </div>
-                    <h1>Spring Boot相关注解</h1>
+                    <h1>Spring Boot中操作JSON</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Zsy on
-                        2021-09-01
+                        2021-09-07
                     </span>
                 </div>
             </div>
@@ -205,85 +205,41 @@
                 post-container">
 
                 <blockquote>
-<p>本文介绍Spring Boot开发web相关注解知识</p>
+<p>本文介绍常用的JSON相关操作，Spring Boot内置Jackson包可以进行JSON相关操作</p>
 </blockquote>
-<h5 id="基础web注解"><a href="#基础web注解" class="headerlink" title="基础web注解"></a>基础web注解</h5><p><strong>Bean处理</strong></p>
-<ul>
-<li>@Component：通用的注解，可标注任意类为 Spring 组件。如果一个 Bean 不知道属于哪个层，可以使用@Component 注解标注；</li>
-<li>@Repository：对应持久层即 Dao 层，主要用于数据库相关操作；</li>
-<li>@Service：对应服务层，主要涉及一些复杂的逻辑，需要用到 Dao 层；</li>
-<li>@Controller：对应 Spring MVC 控制层，一般需要注入 Service 类返回结果数据；</li>
-<li>@RestController：继承于 @Controller，区别在于标注后整个类所有方法将直接返回 JSON 数据，不再需要视图解析处理，目前前后端分离的项目后端都是直接用这个注解的；</li>
-<li>@Configuration：标注是 Java 代码的配置类， Spring Boot 中推荐这种做法不再使用 xml 配置了；</li>
-<li>@Scope：声明 Spring Bean 的作用域,作用于一共有以下几种：<ul>
-<li>singleton：唯一 bean 实例，Spring 中的 bean 默认都是单例的。</li>
-<li>prototype：每次请求都会创建一个新的 bean 实例。</li>
-<li>request：每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP request 内有效。</li>
-<li>session：每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP session 内有效。</li>
-</ul>
-</li>
-</ul>
-<p><strong>HTTP请求</strong></p>
-<ul>
-<li>@RequestMapping：@RequestMapping(value=”/test”,method=RequestMethod.GET)可以指定路径和请求方法</li>
-<li>@GetMapping：get请求注解</li>
-<li>@PostMapping：post请求注解</li>
-<li>@PutMapping</li>
-<li>@DeleteMapping</li>
-</ul>
-<p><strong>前后端参数传递</strong></p>
-<ul>
-<li>@RequestParam：用在方法的参数前面，获取请求中表单类型的key=value格式的数据。</li>
-<li>@PathVariable：用于获取请求路径中的参数。</li>
-<li>@RequestBody：获取请求 body 中的数据，常用于搭配 @PostMapping 请求来提交对象数据.  请求体 的Content-Type 必须为 application/json 格式的数据，接收到数据之后会自动将数据绑定到 Java 对象上去。系统会使用 HttpMessageConverter 或者自定义的 HttpMessageConverter将请求的 body 中的 json 字符串转换为 java 对象。</li>
-<li>@ResponseBody：表示该方法的返回结果直接写入 HTTP response body 中，格式为 json。上面我们提到的 @RestController 其实就是 @Controller 和 @ResponseBody 两个结合起来的。</li>
-</ul>
-<p><strong>读取配置</strong></p>
-<ul>
-<li>@value：可以在任意 Spring 管理的 Bean 中通过这个注解获取任何来源配置的属性值。</li>
-<li>@ConfigurationProperties：指定该类是配置类，且可以指定配置前缀</li>
-<li>@PropertySource：定读取我们自定义的配置文件的。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix= &quot;my&quot; )</span></span><br><span class="line"><span class="meta">@PropertySource(value = &#123;&quot;classpath:my.properties&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyProperties</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxValue= <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><h4 id="Fastjson"><a href="#Fastjson" class="headerlink" title="Fastjson"></a>Fastjson</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">User user1 = <span class="keyword">new</span> User();</span><br><span class="line">String s1 = JSON.toJSONString(user1);</span><br><span class="line">System.out.println(s1);</span><br></pre></td></tr></table></figure>
 
-<p><strong>参数校验</strong></p>
-<ul>
-<li>@NotEmpty 被注释的字符串的不能为 null 也不能为空</li>
-<li>@NotBlank 被注释的字符串非 null，并且必须包含一个非空白字符</li>
-<li>@Null 被注释的元素必须为 null</li>
-<li>@NotNull 被注释的元素必须不为 null</li>
-<li>@AssertTrue 被注释的元素必须为 true</li>
-<li>@AssertFalse 被注释的元素必须为 false</li>
-<li>@Pattern(regex=,flag=)被注释的元素必须符合指定的正则表达式</li>
-<li>@Email 被注释的元素必须是 Email 格式。</li>
-<li>@Min(value)被注释的元素必须是一个数字，其值必须大于等于指定的最小值</li>
-<li>@Max(value)被注释的元素必须是一个数字，其值必须小于等于指定的最大值</li>
-<li>@DecimalMin(value)被注释的元素必须是一个数字，其值必须大于等于指定的最小值</li>
-<li>@DecimalMax(value) 被注释的元素必须是一个数字，其值必须小于等于指定的最大值</li>
-<li>@Size(max=, min=)被注释的元素的大小必须在指定的范围内</li>
-<li>@Digits (integer, fraction)被注释的元素必须是一个数字，其值必须在可接受的范围内</li>
-<li>@Past被注释的元素必须是一个过去的日期</li>
-<li>@Future 被注释的元素必须是一个将来的日期</li>
-</ul>
-<p>只需要在请求处理方法中需要验证的参数前加上 @Valid 注解就会开启校验了，如果验证失败将抛出异常：MethodArgumentNotValidException。</p>
-<ul>
-<li>@Validated：如果你的入参不是用一个 Java 对象来接收的话，比如用 @PathVariables 和 @RequestParam 注解来获取入参，这种情况下要校验参数不要忘记在类的头上加 @Validated 注解，这个参数可以告诉 Spring 去校验方法参数。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/user&quot;)</span></span><br><span class="line"><span class="meta">@Validated</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"><span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;List&lt;User&gt;&gt; findById( <span class="meta">@PathVariable</span> <span class="meta">@Max(value = 5,message = &quot;超过 id 的范围了&quot;)</span> <span class="keyword">long</span> id) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity(userService.findById(id),HttpStatus.OK);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Jackson"><a href="#Jackson" class="headerlink" title="Jackson"></a>Jackson</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ObjectMapper objectMapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">String s2 = objectMapper.writeValueAsString(user);</span><br><span class="line">System.out.println(s2);</span><br></pre></td></tr></table></figure>
 
-<p><strong>统一异常处理</strong></p>
-<ul>
-<li>@ControllerAdvice：定义全局异常处理类，包含 @Component 所以可以被 Spring 扫描到。</li>
-<li>@ExceptionHandler : 声明异常处理方法，表示遇到这个异常，就执行标注的方法。</li>
-</ul>
-<p><strong>配置启动</strong></p>
-<ul>
-<li>@SpringBootApplication：等价于使用 @Configuration、@EnableAutoConfiguration、@ComponentScan  三个注解。</li>
-<li>@Configuration：声明是是一个 Java 形式的配置类，Spring Boot 提倡基于 Java 的配置，相当于你之前在 xml 中配置 bean；</li>
-<li>@EnableConfigurationProperties： 指定配置类，并使配置类生效</li>
-<li>@ComponentScan：标注哪些路径下的类需要被Spring扫描。</li>
-<li>@Conditional：Spring4 新提供的注解，通过 @Conditional 注解可以根据代码中设置的条件装载不同的 bean，也是SpringBoot实现自动配置的基石。</li>
-</ul>
+<h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><h4 id="Fastjson-1"><a href="#Fastjson-1" class="headerlink" title="Fastjson"></a>Fastjson</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">String s =<span class="string">&quot;&#123;\n&quot;</span> +</span><br><span class="line">        <span class="string">&quot;  \&quot;id\&quot;: 1,\n&quot;</span> +</span><br><span class="line">        <span class="string">&quot;  \&quot;userName\&quot;: \&quot;zhangsan\&quot;,\n&quot;</span> +</span><br><span class="line">        <span class="string">&quot;  \&quot;password\&quot;: \&quot;123456\&quot;,\n&quot;</span> +</span><br><span class="line">        <span class="string">&quot;  \&quot;userSex\&quot;: \&quot;man\&quot;,\n&quot;</span> +</span><br><span class="line">        <span class="string">&quot;  \&quot;nickName\&quot;: \&quot;asdf\&quot;,\n&quot;</span> +</span><br><span class="line">        <span class="string">&quot;  \&quot;birthday\&quot;: \&quot;2000-09-11 00:00:00\&quot;\n&quot;</span> +</span><br><span class="line">        <span class="string">&quot;&#125;&quot;</span>;</span><br><span class="line">User user = JSON.parseObject(s, User.class);</span><br><span class="line">System.out.println(user.toString());</span><br></pre></td></tr></table></figure>
+
+<h4 id="Jackson-1"><a href="#Jackson-1" class="headerlink" title="Jackson"></a>Jackson</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user = (User) objectMapper.readValue(s, User.class);</span><br><span class="line">System.out.println(user.toString());</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义ObjectMapper"><a href="#自定义ObjectMapper" class="headerlink" title="自定义ObjectMapper"></a>自定义ObjectMapper</h2><p>Spring Boot内置了Jackson来完成JSON的序列化和反序列化。</p>
+<p>在Spring中使用@ResponseBody注解可以将方法返回的对象序列化成json串</p>
+<p>在Spring Boot中可以自定义一个ObjectMapper来序列化我们想要返回的格式，比如序列化时间</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springboot.demos.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zousy</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> v1.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021-09-07 15:22</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JacksonConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ObjectMapper <span class="title">getObjectMapper</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">        mapper.setDateFormat(<span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>));</span><br><span class="line">        <span class="keyword">return</span> mapper;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这样就会返回如下json串：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="string">&quot;userName&quot;</span>: <span class="string">&quot;zhangsan&quot;</span>,</span><br><span class="line">  <span class="string">&quot;password&quot;</span>: <span class="string">&quot;123456&quot;</span>,</span><br><span class="line">  <span class="string">&quot;nickName&quot;</span>: <span class="string">&quot;asdf&quot;</span>,</span><br><span class="line">  <span class="string">&quot;birthday&quot;</span>: <span class="string">&quot;2000-09-11 00:00:00&quot;</span>,</span><br><span class="line">  <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;man&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Jackson注解"><a href="#Jackson注解" class="headerlink" title="Jackson注解"></a>Jackson注解</h2><h4 id="1-JsonProperty"><a href="#1-JsonProperty" class="headerlink" title="1.@JsonProperty"></a>1.@JsonProperty</h4><p>@JsonProperty，作用在属性上，用来为JSON Key指定一个别名。</p>
+<h4 id="2-Jsonlgnore"><a href="#2-Jsonlgnore" class="headerlink" title="2.@Jsonlgnore"></a>2.@Jsonlgnore</h4><p>@Jsonlgnore，作用在属性上，用来忽略此属性。</p>
+<h4 id="3-JsonIgnoreProperties"><a href="#3-JsonIgnoreProperties" class="headerlink" title="3.@JsonIgnoreProperties"></a>3.@JsonIgnoreProperties</h4><p>@JsonIgnoreProperties，忽略一组属性，作用于类上，比如JsonIgnoreProperties({ “password”, “birthday” })。</p>
+<h4 id="4-JsonFormat"><a href="#4-JsonFormat" class="headerlink" title="4.@JsonFormat"></a>4.@JsonFormat</h4><p>@JsonFormat，用于日期格式化，如：@JsonFormat(pattern = “yyyy-MM-dd HH:mm:ss”)</p>
+<p>还有其他的一些注解，这里不再介绍可参考官方文档。</p>
+<h2 id="JSON相关操作"><a href="#JSON相关操作" class="headerlink" title="JSON相关操作"></a>JSON相关操作</h2><h4 id="JSON数组字符串–-gt-List"><a href="#JSON数组字符串–-gt-List" class="headerlink" title="JSON数组字符串–&gt;List"></a>JSON数组字符串–&gt;List</h4><p><strong>Jackson</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  String jsonArray = <span class="string">&quot;[&#123;\&quot;brand\&quot;:\&quot;ford\&quot;&#125;, &#123;\&quot;brand\&quot;:\&quot;Fiat\&quot;&#125;]&quot;</span>;</span><br><span class="line"></span><br><span class="line">ObjectMapper objectMapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line">List&lt;Car&gt; cars1 = objectMapper.readValue(jsonArray, <span class="keyword">new</span> TypeReference&lt;List&lt;Car&gt;&gt;()&#123;&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Fastjson</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String jsonArray = <span class="string">&quot;[&#123;\&quot;brand\&quot;:\&quot;ford\&quot;&#125;, &#123;\&quot;brand\&quot;:\&quot;Fiat\&quot;&#125;]&quot;</span>;</span><br><span class="line"></span><br><span class="line">List&lt;Car&gt; cars = JSON.parseArray(jsonArray, Car.class);</span><br></pre></td></tr></table></figure>
+
+<p><strong>Jackson 主要操作JSON的类是 ObjectMapper</strong><br><strong>FastJson 主要操作JSON的类是 JSON、JSONObject、JSONArray</strong></p>
+<p><strong>参考</strong>：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://mrbird.cc/Spring-Boot%20JSON.html">Spring Boot中的JSON技术</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904166809157639#heading-24">Jackson使用详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904176003072007#heading-6">FastJson使用详解</a></li>
+</ol>
 
 
                 <hr>
@@ -292,13 +248,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2021/09/07/Spring Boot/spring boot中的JSON/" data-toggle="tooltip" data-placement="top" title="Spring Boot中操作JSON">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2021/08/31/Spring Boot/spring boot自动配置/" data-toggle="tooltip" data-placement="top" title="Spring Boot自动配置相关知识">Next Post &rarr;</a>
+                            <a href="/2021/09/01/Spring Boot/spring boot相关注解/" data-toggle="tooltip" data-placement="top" title="Spring Boot相关注解">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
