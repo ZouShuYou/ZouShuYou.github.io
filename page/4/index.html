@@ -98,16 +98,16 @@
                     
                         
                             <li>
-                                <a href="/tags/">
-                                    Tags
+                                <a href="/archives/">
+                                    Archives
                                 </a>
                             </li>
                         
                     
                         
                             <li>
-                                <a href="/archives/">
-                                    Archives
+                                <a href="/tags/">
+                                    Tags
                                 </a>
                             </li>
                         
@@ -200,6 +200,31 @@
                     <!-- Main Content -->
 
 
+    <div class="post-preview">
+
+        <a href="/2021/03/24/JVM/Java虚拟机内存结构/">
+            <h2 class="post-title">
+                深入了解JVM内存结构
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本文主要介绍JVM内存结构相关知识，需要注意JVM内存结构和Java内存模型是两个概念。
+
+运行时数据区Java虚拟机在执行程序时会把它所管理的内存划分为若干个不同的数据区域。这些区域有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而一直存在，有些区域则依赖用户线程的启动和结束而建立和销毁。
+下图是 JVM 整体架构，中间部分就是 Java 虚拟机定义的各种运行时数据区域。......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-03-24
+        </p>
+
+    </div>
+    <hr>
+    
     <div class="post-preview">
 
         <a href="/2021/03/23/Spring/Spring事务/">
@@ -443,30 +468,6 @@ HashTableHashTable类是一个线程安全的类，它的......
     </div>
     <hr>
     
-    <div class="post-preview">
-
-        <a href="/2021/03/02/Java Base/HashMap/">
-            <h2 class="post-title">
-                深入了解HashMap
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本篇分析HashMap的 hash()函数 和 底层数据结构 以及 常用方法 和 常见面试相关题目
-
-1. HashMap简介HashMap 是一个K，V键值对的常用集合类，它实现了Map接口。jdk1.8 之前 HashMap 采用 数组 + 链表 的方式实现，链表存储key值冲突的数据。jdk1.8 采用  数组 + 链表 / 红黑树 的方式实现，在满足下面两个条件之后，会执行链表转红......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-03-02
-        </p>
-
-    </div>
-    <hr>
-    
 
 
         <!-- Pager -->
@@ -520,16 +521,16 @@ HashTableHashTable类是一个线程安全的类，它的......
                                         
                                             
                                     
-                                        <a href="/tags/#Java并发" title="Java并发"
-                                            rel="7">
-                                            Java并发
+                                        <a href="/tags/#JVM" title="JVM"
+                                            rel="4">
+                                            JVM
                                         </a>
                                         
                                             
                                     
-                                        <a href="/tags/#JVM" title="JVM"
-                                            rel="4">
-                                            JVM
+                                        <a href="/tags/#Java并发" title="Java并发"
+                                            rel="7">
+                                            Java并发
                                         </a>
                                         
                                             
@@ -551,7 +552,7 @@ HashTableHashTable类是一个线程安全的类，它的......
                                             
                                     
                                         <a href="/tags/#记录" title="记录"
-                                            rel="5">
+                                            rel="6">
                                             记录
                                         </a>
                                         
