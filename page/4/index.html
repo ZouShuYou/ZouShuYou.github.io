@@ -95,19 +95,19 @@
                         
                     
                         
-                            <li>
-                                <a href="/archives/">
-                                    Archives
-                                </a>
-                            </li>
-                        
-                    
-                        
                     
                         
                             <li>
                                 <a href="/tags/">
                                     Tags
+                                </a>
+                            </li>
+                        
+                    
+                        
+                            <li>
+                                <a href="/archives/">
+                                    Archives
                                 </a>
                             </li>
                         
@@ -200,6 +200,34 @@
                     <!-- Main Content -->
 
 
+    <div class="post-preview">
+
+        <a href="/2021/03/23/Spring/Spring事务/">
+            <h2 class="post-title">
+                Spring 事务相关知识
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本文介绍Spring事务相关的知识，包括事务隔离级别和事务传播特性。
+
+事务事务是逻辑上的一组操作，要么都执行，要么都不执行。我自己的理解是，数据库操作的最小单位，要么成功，要么失败。
+特性：ACID
+
+原子性（Atomicity）：事务是最小的执行单位，不允许分割。事务的原子性确保动作要么全部完成，要么全部失败回滚。
+一致性（Consistency）：数据库在事务执行前后都保持一致性状态......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-03-23
+        </p>
+
+    </div>
+    <hr>
+    
     <div class="post-preview">
 
         <a href="/2021/03/22/JVM/Java虚拟机类加载过程/">
@@ -439,30 +467,6 @@ HashTableHashTable类是一个线程安全的类，它的......
     </div>
     <hr>
     
-    <div class="post-preview">
-
-        <a href="/2021/02/23/Java Base/Java集合小结/">
-            <h2 class="post-title">
-                Java集合小结
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-这篇文章对Java集合相关类进行介绍，包括Collection、List、Set、Map、Queue这些常见得集合相关接口和类。
-
-1.集合概述常用的集合有List、Set、Map、Queue等，他们之间的关系如下图。List、Queue、Set继承Collection接口。Iterable接口是迭代器，这里不进行过多介绍。Map接口是一个单独的接口，这里不进行介绍。List、Set、Qu......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-02-23
-        </p>
-
-    </div>
-    <hr>
-    
 
 
         <!-- Pager -->
@@ -500,8 +504,6 @@ HashTableHashTable类是一个线程安全的类，它的......
                             <div class="tags">
                                 
                                     
-                                            
-                                    
                                         <a href="/tags/#算法" title="算法"
                                             rel="2">
                                             算法
@@ -509,11 +511,6 @@ HashTableHashTable类是一个线程安全的类，它的......
                                         
                                             
                                     
-                                        <a href="/tags/#JVM" title="JVM"
-                                            rel="4">
-                                            JVM
-                                        </a>
-                                        
                                             
                                     
                                         <a href="/tags/#Java集合" title="Java集合"
@@ -530,18 +527,25 @@ HashTableHashTable类是一个线程安全的类，它的......
                                         
                                             
                                     
-                                            
-                                    
-                                        <a href="/tags/#Redis" title="Redis"
-                                            rel="6">
-                                            Redis
+                                        <a href="/tags/#JVM" title="JVM"
+                                            rel="4">
+                                            JVM
                                         </a>
                                         
+                                            
+                                    
                                             
                                     
                                         <a href="/tags/#Mysql" title="Mysql"
                                             rel="5">
                                             Mysql
+                                        </a>
+                                        
+                                            
+                                    
+                                        <a href="/tags/#Redis" title="Redis"
+                                            rel="6">
+                                            Redis
                                         </a>
                                         
                                             
@@ -561,7 +565,7 @@ HashTableHashTable类是一个线程安全的类，它的......
                                             
                                     
                                         <a href="/tags/#Spring boot" title="Spring boot"
-                                            rel="4">
+                                            rel="5">
                                             Spring boot
                                         </a>
                                         
