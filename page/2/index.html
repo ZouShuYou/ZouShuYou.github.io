@@ -95,13 +95,13 @@
                         
                     
                         
-                    
-                        
                             <li>
                                 <a href="/archives/">
                                     Archives
                                 </a>
                             </li>
+                        
+                    
                         
                     
                         
@@ -200,6 +200,34 @@
                     <!-- Main Content -->
 
 
+    <div class="post-preview">
+
+        <a href="/2021/07/16/Tomcat/Cookie、Session和Token/">
+            <h2 class="post-title">
+                Cookie、Session和Token相关知识
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本文介绍Cookie、Session和Token相关知识
+
+什么是Cookie
+由于Http是无状态的协议，这意味着一旦数据提交后，客户端与服务器的连接就会关闭，再次交互的时候需要重新建立新的连接。
+服务器无法确认用户信息，于是W3C就提出给每个用户发一个通行证，无论谁访问都携带通行证，这样服务器就能从通行证上确认用户信息，这个通行证就是cookie。
+
+cookie存储在客户端：cook......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-07-16
+        </p>
+
+    </div>
+    <hr>
+    
     <div class="post-preview">
 
         <a href="/2021/07/03/Shuyou/如题/">
@@ -444,32 +472,6 @@ redisObject:redisObject 是 Redis 类型系统......
     </div>
     <hr>
     
-    <div class="post-preview">
-
-        <a href="/2021/04/19/Redis/Redis相关知识----数据类型/">
-            <h2 class="post-title">
-                Redis相关知识----数据类型
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍Redis的数据类型相关知识
-
-Redis数据结构简介对于Redis，所有的Key都是字符串。我们在谈Redis基础数据结构时，讨论的是存储值的数据类型，主要包括常见的5种数据类型，分别是：String、List、Set、Zset、Hash。
-
-String字符串String是redis中最基本的数据类型，一个key对应一个value。String类型是二进制安全的，意思是 red......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-04-19
-        </p>
-
-    </div>
-    <hr>
-    
 
 
         <!-- Pager -->
@@ -507,20 +509,6 @@ String字符串String是redis中最基本的数据类型，一个key对应一个
                             <div class="tags">
                                 
                                     
-                                        <a href="/tags/#算法" title="算法"
-                                            rel="2">
-                                            算法
-                                        </a>
-                                        
-                                            
-                                    
-                                            
-                                    
-                                        <a href="/tags/#Java集合" title="Java集合"
-                                            rel="4">
-                                            Java集合
-                                        </a>
-                                        
                                             
                                     
                                         <a href="/tags/#JVM" title="JVM"
@@ -530,13 +518,27 @@ String字符串String是redis中最基本的数据类型，一个key对应一个
                                         
                                             
                                     
+                                        <a href="/tags/#算法" title="算法"
+                                            rel="2">
+                                            算法
+                                        </a>
+                                        
+                                            
+                                    
+                                        <a href="/tags/#Java集合" title="Java集合"
+                                            rel="4">
+                                            Java集合
+                                        </a>
+                                        
+                                            
+                                    
+                                            
+                                    
                                         <a href="/tags/#Java并发" title="Java并发"
                                             rel="7">
                                             Java并发
                                         </a>
                                         
-                                            
-                                    
                                             
                                     
                                         <a href="/tags/#Mysql" title="Mysql"
@@ -554,7 +556,7 @@ String字符串String是redis中最基本的数据类型，一个key对应一个
                                             
                                     
                                         <a href="/tags/#记录" title="记录"
-                                            rel="6">
+                                            rel="7">
                                             记录
                                         </a>
                                         
@@ -567,6 +569,8 @@ String字符串String是redis中最基本的数据类型，一个key对应一个
                                         
                                             
                                     
+                                            
+                                    
                                         <a href="/tags/#Spring boot" title="Spring boot"
                                             rel="5">
                                             Spring boot
@@ -574,15 +578,13 @@ String字符串String是redis中最基本的数据类型，一个key对应一个
                                         
                                             
                                     
-                                            
-                                    
-                                            
-                                    
                                         <a href="/tags/#Spring AOP" title="Spring AOP"
                                             rel="2">
                                             Spring AOP
                                         </a>
                                         
+                                            
+                                    
                                             
                             </div>
                         </section>
