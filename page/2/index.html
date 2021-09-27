@@ -202,6 +202,38 @@
 
     <div class="post-preview">
 
+        <a href="/2021/07/26/Java Concurrent/synchronized和volatile相关知识/">
+            <h2 class="post-title">
+                synchronized和volatile相关知识
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+总结下synchronized和volatile关键字相关八股文
+
+在多线程环境下，线程是交替执行的，多线程竞争共享资源容易产生线程不安全的问题，甚至产生死锁的问题。
+使用多线程，一定要保证程序是线程安全的。通常会采用以下一些方法来保证线程安全：
+
+多线程之间没有共享变量，即考虑使用线程私有变量
+加锁
+CAS
+
+synchronized
+Synchronized是Java的关键字，它可以将......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-07-26
+        </p>
+
+    </div>
+    <hr>
+    
+    <div class="post-preview">
+
         <a href="/2021/07/16/Tomcat/Cookie、Session和Token/">
             <h2 class="post-title">
                 Cookie、Session和Token相关知识
@@ -446,32 +478,6 @@ Redis提供RDB和AO......
     </div>
     <hr>
     
-    <div class="post-preview">
-
-        <a href="/2021/04/21/Redis/Redis相关知识----对象机制/">
-            <h2 class="post-title">
-                Redis相关知识----对象机制
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍Redis对象机制相关知识，只是对底层做一些了解，并不深入底层的数据结构。
-
-Redis的5种基础数据类型，在底层是采用对象机制实现的。
-Redis的每种对象其实都由对象结构(redisObject) 与 对应编码的数据结构组合而成，而每种对象类型对应若干编码方式，不同的编码方式所对应的底层数据结构是不同的。
-redisObject:redisObject 是 Redis 类型系统......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-04-21
-        </p>
-
-    </div>
-    <hr>
-    
 
 
         <!-- Pager -->
@@ -583,6 +589,8 @@ redisObject:redisObject 是 Redis 类型系统......
                                             Spring AOP
                                         </a>
                                         
+                                            
+                                    
                                             
                                     
                                             

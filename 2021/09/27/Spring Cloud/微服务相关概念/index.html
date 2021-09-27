@@ -13,11 +13,11 @@
 
     <title>
         
-          About - ShuYou&#39;s Blog
+          微服务相关概念 - ShuYou&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://shuyou.site/about/">
+    <link rel="canonical" href="https://shuyou.site/2021/09/27/Spring Cloud/微服务相关概念/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -161,18 +161,31 @@
 
     <!-- Main Content -->
     
-<!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+<!-- Image to hack wechat -->
+<!-- <img src="https://shuyou.site/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>
-                        About
-                    </h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">
-                        花有重开日，人无再少年。
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Spring Cloud" title="Spring Cloud">Spring Cloud</a>
+                        
+                    </div>
+                    <h1>微服务相关概念</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Zsy on
+                        2021-09-27
                     </span>
                 </div>
             </div>
@@ -180,208 +193,124 @@
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>本文介绍微服务相关概念，了解微服务的相关架构和发展。</p>
+</blockquote>
+<h4 id="微服务架构"><a href="#微服务架构" class="headerlink" title="微服务架构"></a>微服务架构</h4><p>传统的软件架构，往往是一个单体应用糅合了各种业务模块。随着业务的发展，单体应用变得庞大之后产生难以维护的问题，微服务架构便出现了。</p>
+<p>微服务是一种架构风格，微服务将一个独立的系统拆分成多个微小的服务，这些小型服务都在各自独立的进程中运行，服务之间通过约定的通讯方式进行通信协作。</p>
+<p>微服务架构中的一些核心概念：</p>
+<ul>
+<li>服务注册与发现</li>
+<li>熔断、限流、降级、隔离</li>
+<li>服务网关</li>
+<li>链路追踪</li>
+<li>负载均衡</li>
+<li>服务调用</li>
+</ul>
+<h4 id="集群与分布式"><a href="#集群与分布式" class="headerlink" title="集群与分布式"></a>集群与分布式</h4><p><strong>集群</strong>：多台计算机完成同一个工作。<br><strong>分布式</strong>：多台计算机做不同的工作，但是它们之间彼此进行交互以实现一个共同的目标。<br><strong>分布式集群</strong>：一个业务使用集群部署，多个业务之间采用分布式部署，从而形成分布式集群。</p>
+<h4 id="服务注册与发现"><a href="#服务注册与发现" class="headerlink" title="服务注册与发现"></a>服务注册与发现</h4><p>对每个微服务模块进行统一的服务注册，方便管理。</p>
+<p>常用的解决方案有：</p>
+<ul>
+<li>Spring Cloud Eureka</li>
+<li>Nacos</li>
+<li>Zookeeper</li>
+</ul>
+<h4 id="服务调用"><a href="#服务调用" class="headerlink" title="服务调用"></a>服务调用</h4><p>服务之间互相调用的解决方案: rpc 还是 http</p>
+<ul>
+<li>Dubbo</li>
+<li>Spring Cloud Ribbon</li>
+<li>Spring Cloud Feign</li>
+</ul>
+<h4 id="配置中心"><a href="#配置中心" class="headerlink" title="配置中心"></a>配置中心</h4><p>解决服务太多导致配置文件太多的问题</p>
+<ul>
+<li>Nacos</li>
+<li>Spring Cloud Config</li>
+</ul>
+<h4 id="API网关"><a href="#API网关" class="headerlink" title="API网关"></a>API网关</h4><p>对外提供统一的API接口，方便管理，采用API网关</p>
+<ul>
+<li>Spring Cloud Gateway</li>
+<li>Spring Cloud Zuul</li>
+</ul>
+<h4 id="链路跟踪"><a href="#链路跟踪" class="headerlink" title="链路跟踪"></a>链路跟踪</h4><p>当服务之间调用出现错误时，方便排除哪一服务出现问题。</p>
+<ul>
+<li>Spring Cloud Sleuth</li>
+</ul>
+<h4 id="服务流控、熔断等"><a href="#服务流控、熔断等" class="headerlink" title="服务流控、熔断等"></a>服务流控、熔断等</h4><p>当访问量过大时对流量进行控制</p>
+<ul>
+<li>Spring Cloud Alibaba Sentinel</li>
+<li>Spring Cloud Hystrix</li>
+</ul>
+<p>Spring Cloud对微服务架构提供了很多的解决方案，其中一部分是Netflix的解决方案，Spring Cloud对其进行了整合，还有一部分是alibaba提供的解决方案。</p>
+<p>总的来说，Spring Cloud Alibaba的解决方案更加完整，且社区还在进行更新，所以后续可能会入门和学习Spring Cloud Alibaba的解决方案。</p>
 
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2021/09/23/Shuyou/面/" data-toggle="tooltip" data-placement="top" title="面">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+    <!-- Side Catalog Container -->
         
 
-                <!-- USE SIDEBAR -->
-                <!-- Post Container -->
-                <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+    <!-- Sidebar Container -->
 
-                    <p>姓名：邹书友(zou，一声)<br>生于98年，毕业于2020年<br>毕业之前都在武汉，毕业后来到深圳工作。<br>喜欢看电影，大概是因为可以看到不一样的人。</p>
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-
-                        <!-- 如果开启评论功能 -->
-                        
-                            <hr>
-
-                            
-
-                                    
-
-
-                                            
-
-                                                    
-
-
-
-                                                            
-
-                </div>
-                <!-- Sidebar Container -->
-                <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-                    <!-- Featured Tags -->
-                    
-                        <section>
-                            <!-- no hr -->
-                            <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                            <div class="tags">
-                                
-                                    
-                                            
-                                    
-                                        <a href="/tags/#JVM" title="JVM"
-                                            rel="4">
-                                            JVM
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#算法" title="算法"
-                                            rel="2">
-                                            算法
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#Java集合" title="Java集合"
-                                            rel="4">
-                                            Java集合
-                                        </a>
-                                        
-                                            
-                                    
-                                            
-                                    
-                                        <a href="/tags/#Java并发" title="Java并发"
-                                            rel="7">
-                                            Java并发
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#Mysql" title="Mysql"
-                                            rel="5">
-                                            Mysql
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#Redis" title="Redis"
-                                            rel="6">
-                                            Redis
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#记录" title="记录"
-                                            rel="7">
-                                            记录
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#Spring" title="Spring"
-                                            rel="4">
-                                            Spring
-                                        </a>
-                                        
-                                            
-                                    
-                                            
-                                    
-                                        <a href="/tags/#Spring boot" title="Spring boot"
-                                            rel="5">
-                                            Spring boot
-                                        </a>
-                                        
-                                            
-                                    
-                                        <a href="/tags/#Spring AOP" title="Spring AOP"
-                                            rel="2">
-                                            Spring AOP
-                                        </a>
-                                        
-                                            
-                                    
-                                            
-                                    
-                                            
-                            </div>
-                        </section>
-                        
-
-                            <!-- Short About -->
-                            <section class="visible-md visible-lg">
-                                <hr>
-                                <h5><a href="/about/">ABOUT ME</a></h5>
-                                <div class="short-about">
-
-                                    
-                                        <img src="/img/me.jpg" />
-                                        
-
-                                            
-                                                <p>
-                                                    花有重开日，人无再少年。
-                                                </p>
-                                                
-
-                                                    <!-- SNS Link -->
-                                                    <ul class="list-inline">
-                                                        
-                                                                
-                                                                        
-                                                                            <li>
-                                                                                <a target="_blank"
-                                                                                    href="https://www.zhihu.com/people/ZouShuYou">
-                                                                                    <span class="fa-stack fa-lg">
-                                                                                        <i
-                                                                                            class="fa fa-circle fa-stack-2x"></i>
-                                                                                        <i
-                                                                                            class="fa  fa-stack-1x fa-inverse">知</i>
-                                                                                    </span>
-                                                                                </a>
-                                                                            </li>
-                                                                            
-
-                                                                                
-
-                                                                                        
-
-                                                                                                
-                                                                                                    <li>
-                                                                                                        <a target="_blank"
-                                                                                                            href="https://github.com/ZouShuYou">
-                                                                                                            <span
-                                                                                                                class="fa-stack fa-lg">
-                                                                                                                <i
-                                                                                                                    class="fa fa-circle fa-stack-2x"></i>
-                                                                                                                <i
-                                                                                                                    class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                                                                                            </span>
-                                                                                                        </a>
-                                                                                                    </li>
-                                                                                                    
-
-
-                                                                                                        
-                                                    </ul>
-                                </div>
-                            </section>
-
-                            <!-- Friends Blog -->
-                            
-                </div>
+                <!-- Featured Tags -->
                 
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Spring Cloud" title="Spring Cloud">Spring Cloud</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+
+
+
+
 
     <!-- Footer -->
     <!-- Footer -->
