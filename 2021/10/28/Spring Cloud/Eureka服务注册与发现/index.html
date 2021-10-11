@@ -13,11 +13,11 @@
 
     <title>
         
-          微服务相关概念 - ShuYou&#39;s Blog
+          Eureka服务注册与发现 - ShuYou&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://shuyou.site/2021/09/27/Spring Cloud/微服务相关概念/">
+    <link rel="canonical" href="https://shuyou.site/2021/10/28/Spring Cloud/Eureka服务注册与发现/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -181,11 +181,11 @@
                           <a class="tag" href="/tags/#Spring Cloud" title="Spring Cloud">Spring Cloud</a>
                         
                     </div>
-                    <h1>微服务相关概念</h1>
+                    <h1>Eureka服务注册与发现</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Zsy on
-                        2021-09-27
+                        2021-10-28
                     </span>
                 </div>
             </div>
@@ -205,54 +205,30 @@
                 post-container">
 
                 <blockquote>
-<p>本文介绍微服务相关概念，了解微服务的相关架构和发展。</p>
+<p>本文介绍Eureka相关知识</p>
 </blockquote>
-<h4 id="微服务架构"><a href="#微服务架构" class="headerlink" title="微服务架构"></a>微服务架构</h4><p>传统的软件架构，往往是一个单体应用糅合了各种业务模块。随着业务的发展，单体应用变得庞大之后产生难以维护的问题，微服务架构便出现了。</p>
-<p>微服务是一种架构风格，微服务将一个独立的系统拆分成多个微小的服务，这些小型服务都在各自独立的进程中运行，服务之间通过约定的通讯方式进行通信协作。</p>
-<p>微服务架构中的一些核心概念：</p>
-<ul>
-<li>服务注册与发现</li>
-<li>熔断、限流、降级、隔离</li>
-<li>服务网关</li>
-<li>链路追踪</li>
-<li>负载均衡</li>
-<li>服务调用</li>
-</ul>
-<h4 id="集群与分布式"><a href="#集群与分布式" class="headerlink" title="集群与分布式"></a>集群与分布式</h4><p><strong>集群</strong>：多台计算机完成同一个工作。<br><strong>分布式</strong>：多台计算机做不同的工作，但是它们之间彼此进行交互以实现一个共同的目标。<br><strong>分布式集群</strong>：一个业务使用集群部署，多个业务之间采用分布式部署，从而形成分布式集群。</p>
-<h4 id="服务注册与发现"><a href="#服务注册与发现" class="headerlink" title="服务注册与发现"></a>服务注册与发现</h4><p>对每个微服务模块进行统一的服务注册，方便管理。</p>
-<p>常用的解决方案有：</p>
-<ul>
-<li>Spring Cloud Eureka</li>
-<li>Nacos</li>
-<li>Zookeeper</li>
-</ul>
-<h4 id="服务调用"><a href="#服务调用" class="headerlink" title="服务调用"></a>服务调用</h4><p>服务之间互相调用的解决方案: rpc 还是 http</p>
-<ul>
-<li>Dubbo</li>
-<li>Spring Cloud Ribbon</li>
-<li>Spring Cloud Feign</li>
-</ul>
-<h4 id="配置中心"><a href="#配置中心" class="headerlink" title="配置中心"></a>配置中心</h4><p>解决服务太多导致配置文件太多的问题</p>
-<ul>
-<li>Nacos</li>
-<li>Spring Cloud Config</li>
-</ul>
-<h4 id="API网关"><a href="#API网关" class="headerlink" title="API网关"></a>API网关</h4><p>对外提供统一的API接口，方便管理，采用API网关</p>
-<ul>
-<li>Spring Cloud Gateway</li>
-<li>Spring Cloud Zuul</li>
-</ul>
-<h4 id="链路跟踪"><a href="#链路跟踪" class="headerlink" title="链路跟踪"></a>链路跟踪</h4><p>当服务之间调用出现错误时，方便排除哪一服务出现问题。</p>
-<ul>
-<li>Spring Cloud Sleuth</li>
-</ul>
-<h4 id="服务流控、熔断等"><a href="#服务流控、熔断等" class="headerlink" title="服务流控、熔断等"></a>服务流控、熔断等</h4><p>当访问量过大时对流量进行控制</p>
-<ul>
-<li>Spring Cloud Alibaba Sentinel</li>
-<li>Spring Cloud Hystrix</li>
-</ul>
-<p>Spring Cloud对微服务架构提供了很多的解决方案，其中一部分是Netflix的解决方案，Spring Cloud对其进行了整合，还有一部分是alibaba提供的解决方案。</p>
-<p>总的来说，Spring Cloud Alibaba的解决方案更加完整，且社区还在进行更新，所以后续可能会入门和学习Spring Cloud Alibaba的解决方案。</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Eureka是由netflix开发的一款服务治理的框架，Sping Cloud对其进行了集成。</p>
+<p>Eureka既包括客户端也包括服务端。Eureka客户端是服务提供者，它将自己注册到Eureka服务端，并周期性地发送心跳包来更新它的服务租约，同时也能从服务端查询当前注册的服务信息并把它们缓存到本地并周期性地刷新服务状态；Eureka服务端是一个服务注册中心，提供服务的注册和发现，即当前有哪些服务注册进来可供使用。</p>
+<p><img src="https://img-blog.csdnimg.cn/9134b450a8d94833b3b7972c82a50eff.png?,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bCP6Iiffg==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="Eureka架构"></p>
+<h2 id="服务注册中心"><a href="#服务注册中心" class="headerlink" title="服务注册中心"></a>服务注册中心</h2><p>1.在pom.xml文件中引入 eureka-server</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--eureka-server--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>2.在启动类中加上注解 <strong>@EnableEurekaServer</strong><br>3.在 application.yml 添加以下配置，作为服务注册中心时禁止默认的自我注册：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">eureka7001.com</span> <span class="comment">#eureka服务端实例名称</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">register-with-eureka:</span> <span class="literal">false</span> <span class="comment">#表示不向注册中心注册自己</span></span><br><span class="line">    <span class="attr">fetch-registry:</span> <span class="literal">false</span> <span class="comment">#false表示自己就是注册中心</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://eureka7001.com:7001/eureka/</span></span><br></pre></td></tr></table></figure>
+<h2 id="服务提供者"><a href="#服务提供者" class="headerlink" title="服务提供者"></a>服务提供者</h2><p>1.在pom.xml文件中引入 eureka-client</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>2.在启动类中加上注解 <strong>@EnableDiscoveryClient</strong><br>3.在 application.yml 添加以下配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">register-with-eureka:</span> <span class="literal">true</span> <span class="comment">#表示向注册中心注册自己</span></span><br><span class="line">    <span class="attr">fetch-registry:</span> <span class="literal">true</span> <span class="comment">#是否从EurekaServer抓取已有的注册信息，默认为true，单节点无所谓,集群必须设置为true才能配合ribbon使用负载均衡</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/</span></span><br></pre></td></tr></table></figure>
+<h2 id="Eureka-Server集群"><a href="#Eureka-Server集群" class="headerlink" title="Eureka-Server集群"></a>Eureka-Server集群</h2><p>Eureka服务端充当了重要的角色，所有Eureka客户端都将自己提供的服务注册到Eureka服务端，然后供所有服务消费者使用。如果单节点的Eureka服务端宕机了，那么所有服务都无法正常的访问，这必将是灾难性的。为了提高Eureka服务端的可用性，我们一般会对其集群部署，即同时部署多个Eureka服务端，并且可以相互间同步服务。</p>
+<p>eureka-server1:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">7001</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">eureka7001.com</span> <span class="comment">#eureka服务端实例名称</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">register-with-eureka:</span> <span class="literal">false</span> <span class="comment">#表示不向注册中心注册自己</span></span><br><span class="line">    <span class="attr">fetch-registry:</span> <span class="literal">false</span> <span class="comment">#false表示自己就是组测中心</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://eureka7002.com:7002/eureka/</span></span><br></pre></td></tr></table></figure>
+<p>eureka-server2:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">7002</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">eureka7001.com</span> <span class="comment">#eureka服务端实例名称</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">register-with-eureka:</span> <span class="literal">false</span> <span class="comment">#表示不向注册中心注册自己</span></span><br><span class="line">    <span class="attr">fetch-registry:</span> <span class="literal">false</span> <span class="comment">#false表示自己就是组测中心</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://eureka7001.com:7001/eureka/</span></span><br></pre></td></tr></table></figure>
+<p>通过指定 defaultZone 为其他 server 地址进行集群。</p>
+<p><strong>参考</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://mrbird.cc/Spring-Cloud-Eureka.html">Spring Cloud Eureka服务治理</a></li>
+<li><a target="_blank" rel="noopener" href="http://cloud.spring.io/spring-cloud-netflix/1.4.x/multi/multi__service_discovery_eureka_clients.html">Eureka</a></li>
+</ol>
 
 
                 <hr>
@@ -261,13 +237,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2021/10/28/Spring Cloud/Eureka服务注册与发现/" data-toggle="tooltip" data-placement="top" title="Eureka服务注册与发现">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2021/09/23/Shuyou/面/" data-toggle="tooltip" data-placement="top" title="面">Next Post &rarr;</a>
+                            <a href="/2021/09/27/Spring Cloud/微服务相关概念/" data-toggle="tooltip" data-placement="top" title="微服务相关概念">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
