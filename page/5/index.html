@@ -202,6 +202,61 @@
 
     <div class="post-preview">
 
+        <a href="/2021/03/10/Java Concurrent/ReentrantReadWriteLock/">
+            <h2 class="post-title">
+                深入了解ReentrantReadWriteLock
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本文分析JDK1.8中的ReentrantReadWriteLock类
+
+简介由于ReentrantLock是独占锁，某时只有一个线程可以获取该锁，而实际中会有写少读多的场景，所以ReentrantReadWriteLock应运而生，采用读写分离的策略，允许多个线程同时获取该锁。
+ReentrantReadWriteLock即可重入读写锁，内部维护一个ReadLock和一个WriteLoc......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-03-10
+        </p>
+
+    </div>
+    <hr>
+    
+    <div class="post-preview">
+
+        <a href="/2021/03/08/Java Concurrent/Java并发基础/">
+            <h2 class="post-title">
+                Java并发基础
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本篇介绍Java并发的基础知识，主要包括线程安全，共享变量的内存可见性，synchronized和volatile关键字，指令重排序，伪共享等相关知识。
+
+并发与并行
+并发是指同一时间段内多个任务执行。
+并行是指同一时刻，多个任务同时执行。
+
+并发是单位时间内，一个CPU切换时间片对多个任务进行处理
+并行是同一时刻，多个CPU对多个任务同时进行处理
+线程安全共享资源：该资源被多个线程所持有......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-03-08
+        </p>
+
+    </div>
+    <hr>
+    
+    <div class="post-preview">
+
         <a href="/2021/03/05/Java Concurrent/ThreadLocal/">
             <h2 class="post-title">
                 深入了解ThreadLocal
@@ -486,7 +541,7 @@ github地址
                                             
                                     
                                         <a href="/tags/#记录" title="记录"
-                                            rel="7">
+                                            rel="8">
                                             记录
                                         </a>
                                         
@@ -517,6 +572,11 @@ github地址
                                     
                                             
                                     
+                                        <a href="/tags/#Spring Cloud" title="Spring Cloud"
+                                            rel="2">
+                                            Spring Cloud
+                                        </a>
+                                        
                                             
                             </div>
                         </section>
