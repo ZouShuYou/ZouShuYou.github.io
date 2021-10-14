@@ -17,7 +17,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://shuyou.site/page/4/">
+    <link rel="canonical" href="https://shuyou.site/page/6/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -202,272 +202,24 @@
 
     <div class="post-preview">
 
-        <a href="/2021/04/07/Mysql/Mysql相关知识(一)/">
+        <a href="/2020/11/29/Shuyou/hello-world/">
             <h2 class="post-title">
-                Mysql相关知识（一）
+                Welcome to ShuYou Blog
             </h2>
             <h3 class="post-subtitle">
-                
+                 "Hello World, Hello Blog"
             </h3>
             <div class="post-content-preview">
                 
-本文介绍Mysql相关知识，主要包括Mysql的基础架构、事务、索引和日志等知识。
+“Yeah It’s on. ”
 
-基础架构基础架构示意图：
-
-连接器：管理连接，权限验证
-查询缓存：命中则直接返回结果
-分析器：词法分析，语法分析
-优化器：执行计划生成，索引选择
-执行器：操作引擎，返回结果
-存储引擎：存储数据，提供读写接口
-
-Mysql可以分为Server层和存储引擎层，不同的存储引擎公用一个Server层，常见的存储引......
+前言这是使用Hexo搭建的博客，使用了Hux的主题。用腾讯云做的服务器，nginx静态资源访问，图片加载很慢，之后再优化下吧。刚开始是打算用来记录Java技术之类的学习，现在想了下这个博客还是用来记录自己平时的想法和生活吧。具体的技术什么的就发表在平台之类的网站上吧。
+计划2020年毕业的，今年也比较特殊，新冠嘛。年初谈了女朋友，当时已经签了三方，可是也......
             </div>
         </a>
         <p class="post-meta">
             Posted by Zsy on
-                2021-04-07
-        </p>
-
-    </div>
-    <hr>
-    
-    <div class="post-preview">
-
-        <a href="/2021/04/01/Java Concurrent/Java线程池/">
-            <h2 class="post-title">
-                Java线程池相关知识
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍Java线程池相关知识
-
-前言线程池：线程池是一种基于池化思想管理线程的工具，经常出现再多线程服务器中。
-线程池解决的问题是什么：线程池解决的核心问题就是资源管理问题。在并发环境下，系统不能确定任意时刻，有多少任务需要执行，有多少资源需要投入。会存在下列问题：
-
-频繁申请/销毁资源和调度资源，将带来额外的消耗，可能会非常巨大。
-对资源无限申请缺乏抑制手段，可能会引发系统资源耗尽的风......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-04-01
-        </p>
-
-    </div>
-    <hr>
-    
-    <div class="post-preview">
-
-        <a href="/2021/03/31/Algorithm/tree/二叉树/">
-            <h2 class="post-title">
-                二叉树相关知识
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍二叉树相关知识
-
-定义：树的任意节点至多包含两棵子树。
-数据存储：
-
-链表
-数组
-
-链表方式定义
-123456789101112131415public class TreeNode &#123;    public int val;    public TreeNode left;    public TreeNode right;        public TreeNode(......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-03-31
-        </p>
-
-    </div>
-    <hr>
-    
-    <div class="post-preview">
-
-        <a href="/2021/03/30/Spring/Spring bean生命周期/">
-            <h2 class="post-title">
-                Spring bean的生命周期相关知识
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文简单介绍Spring bean的生命周期相关知识
-
-Spring IOC 简介IOC：Inversion of Control,即控制反转。传统Java程序中，我们是自己创建对象，而Spring IoC 是有一个容器来保管我们创建的对象，即将对象交给Spring 容器进行管理。
-bean：在 Spring 中，构成应用程序主干并由 Spring IoC 容器管理的对象称为 bean。 ......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-03-30
-        </p>
-
-    </div>
-    <hr>
-    
-    <div class="post-preview">
-
-        <a href="/2021/03/25/JVM/Java垃圾回收/">
-            <h2 class="post-title">
-                Java垃圾回收
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍Java垃圾回收相关知识
-
-判断一个对象是否可以被回收回收对象首先需要判断这个对象是否可以被回收，Java虚拟机采用可达性分析算法判断。
-引用计数算法
-给对象添加一个引用计数器，当对象增加一个引用时计数器加一，减少一个引用时计数器减一。引用计数为 0 的对象可被回收。
-两个对象出现循环引用的情况下，此时引用计数器永远不为 0，导致无法对它们进行回收。
-正因为循环引用的存在，因此 J......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-03-25
-        </p>
-
-    </div>
-    <hr>
-    
-    <div class="post-preview">
-
-        <a href="/2021/03/24/JVM/Java虚拟机内存结构/">
-            <h2 class="post-title">
-                深入了解JVM内存结构
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文主要介绍JVM内存结构相关知识，需要注意JVM内存结构和Java内存模型是两个概念。
-
-运行时数据区Java虚拟机在执行程序时会把它所管理的内存划分为若干个不同的数据区域。这些区域有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而一直存在，有些区域则依赖用户线程的启动和结束而建立和销毁。
-下图是 JVM 整体架构，中间部分就是 Java 虚拟机定义的各种运行时数据区域。......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-03-24
-        </p>
-
-    </div>
-    <hr>
-    
-    <div class="post-preview">
-
-        <a href="/2021/03/23/Spring/Spring事务/">
-            <h2 class="post-title">
-                Spring 事务相关知识
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍Spring事务相关的知识，包括事务隔离级别和事务传播特性。
-
-事务事务是逻辑上的一组操作，要么都执行，要么都不执行。我自己的理解是，数据库操作的最小单位，要么成功，要么失败。
-特性：ACID
-
-原子性（Atomicity）：事务是最小的执行单位，不允许分割。事务的原子性确保动作要么全部完成，要么全部失败回滚。
-一致性（Consistency）：数据库在事务执行前后都保持一致性状态......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-03-23
-        </p>
-
-    </div>
-    <hr>
-    
-    <div class="post-preview">
-
-        <a href="/2021/03/22/JVM/Java虚拟机类加载过程/">
-            <h2 class="post-title">
-                Java类加载机制
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文简单介绍Java类加载相关知识
-
-Java类的生命周期一个类从被加载到虚拟机内存到卸载出虚拟机内存，它的生命周期会经历：加载、验证、准备、解析、初始化、使用、卸载这七个阶段。其中验证、准备、解析三个部分统称为连接。其中加载、验证、准备、初始化、卸载这五个阶段的顺序是确定的，类型的加载过程必须按这种顺序，而解析阶段却不一定，它在某些情况下可以在初始化之后再开始，这是为了支持Java语言运......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-03-22
-        </p>
-
-    </div>
-    <hr>
-    
-    <div class="post-preview">
-
-        <a href="/2021/03/16/Algorithm/缓存淘汰算法/">
-            <h2 class="post-title">
-                FIFO、LRU、LFU三种缓存淘汰算法
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍三种常用缓存淘汰算法，即它们的简单实现。
-
-简介缓存，就是将程序或系统经常要调用的对象存在内存中，再次调用时可以快速从内存中获取对象，不必再去创建新的重复的实例。当缓存中的数据太多超过一定值时，通常会采取一些缓存淘汰算法进行处理。
-FIFO（先进先出）FIFO即先进先出算法，队列也具有先进先出的性质，所以可以考虑采用LinkedList实现FIFO算法。但是只用LinkedList......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-03-16
-        </p>
-
-    </div>
-    <hr>
-    
-    <div class="post-preview">
-
-        <a href="/2021/03/16/Java Base/LinkedHashMap/">
-            <h2 class="post-title">
-                深入了解LinkedHashMap
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍LinkedHashMap的相关知识
-
-简介之前了解过HashMap，HashMap是无序的，当我们希望有顺序地去存储key-value时，就需要使用LinkedHashMap了。
-LinkedHashMap由哈希表+双向链表组成，它继承自HashMap，重写了HashMap的一些方法，可以用于LRU算法，它和HashMap一样不是线程安全的。
-123456789101112131......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-03-16
+                2020-11-29
         </p>
 
     </div>
@@ -480,14 +232,10 @@ LinkedHashMap由哈希表+双向链表组成，它继承自HashMap，重写了Ha
         <ul class="pager">
             
                 <li class="previous">
-                    <a href="/page/3/">&larr; Newer Posts</a>
+                    <a href="/page/5/">&larr; Newer Posts</a>
                 </li>
                 
                     
-                        <li class="next">
-                            <a href="/page/5/">Older Posts &rarr;</a>
-                        </li>
-                        
         </ul>
 
                         <!-- 如果开启评论功能 -->
