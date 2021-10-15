@@ -193,7 +193,13 @@ layout: layout
                                                 <p>
                                                     <%= config['sidebar-about-description'] %>
                                                 </p>
-                                                <% }%>
+                                            <% }%>
+
+                                            <% if(config['email']) { %>
+                                                <p>
+                                                   EMAIL: <%= config['email'] %>
+                                                </p>
+                                            <% }%>
 
                                                     <!-- SNS Link -->
                                                     <ul class="list-inline">
