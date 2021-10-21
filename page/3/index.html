@@ -202,6 +202,33 @@
 
     <div class="post-preview">
 
+        <a href="/2021/05/14/JVM/Java内存模型/">
+            <h2 class="post-title">
+                Java内存模型
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本文介绍Java内存模型相关知识
+
+Java内存模型和JVM内存结构是两个不同的概念。
+Java内存模型：
+Java 的并发采用的是共享内存模型，Java 线程之间的通信总是隐式进行，整个通信过程对程序员完全透明。如果编写多线程程序的 Java 程序员不理解隐式进行的线程之间通信的工作机制，很可能会遇到各种奇怪的内存可见性问题。
+为了解决可能由共享内存模型引发的内存可见性问题，抽象出了Ja......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-05-14
+        </p>
+
+    </div>
+    <hr>
+    
+    <div class="post-preview">
+
         <a href="/2021/05/11/Redis/Redis相关知识----缓存问题/">
             <h2 class="post-title">
                 Redis相关知识----缓存问题
@@ -446,39 +473,6 @@ offe......
     </div>
     <hr>
     
-    <div class="post-preview">
-
-        <a href="/2021/04/16/Mysql/Mysql相关知识(五)/">
-            <h2 class="post-title">
-                Mysql相关知识（五）
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍Mysql ACID特性的实现原理
-
-ACID:
-
-原子性
-一致性
-隔离性
-持久性
-
-原子性：一个事务是一个不可切割的单位，要么全部执行成功，要么全部失败。
-是采用undo log日志实现的。undo log日志用来记录Mysql逻辑语句的执行。
-当事务对数据库进行修改时，InnoDB会生成对应的undo log；如果事务执行失败或调用了rollback，导致事务需要回滚，便可以利......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-04-16
-        </p>
-
-    </div>
-    <hr>
-    
 
 
         <!-- Pager -->
@@ -556,7 +550,7 @@ ACID:
                                             
                                     
                                         <a href="/tags/#Redis" title="Redis"
-                                            rel="7">
+                                            rel="8">
                                             Redis
                                         </a>
                                         
