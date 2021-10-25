@@ -202,6 +202,31 @@
 
     <div class="post-preview">
 
+        <a href="/2021/10/25/Tomcat/Tomcat报错及解决方案/">
+            <h2 class="post-title">
+                Cookie、Session和Token相关知识
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                最近试着在wsl2中使用docker跑公司的web项目，但是tomcat容器会报错
+报错java.lang.illegalargumentexception the main resource set specified [...] is not valid in Tomcat
+
+解决方案将 %CATALINA_HOME%/conf/server.xml 中的
+&lt;Context doc......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-10-25
+        </p>
+
+    </div>
+    <hr>
+    
+    <div class="post-preview">
+
         <a href="/2021/10/20/Disruptor/Disruptor源码分析/">
             <h2 class="post-title">
                 Disruptor源码分析
@@ -439,33 +464,6 @@ HttpMessageConverterHttpMessageConvert......
     </div>
     <hr>
     
-    <div class="post-preview">
-
-        <a href="/2021/09/10/Spring Boot/spring boot中使用过滤器和拦截器/">
-            <h2 class="post-title">
-                Spring Boot中使用过滤器和拦截器
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-过滤器（Filter）和拦截器（Interceptor）是Web项目中常用的两个功能，本文将简单介绍在Spring Boot中使用过滤器和拦截器。
-
-Filter过滤器可以用于过滤一些非法字符、权限检查等操作
-在Spring Boot中可以通过注解@WebFilter或者使用配置类来实现过滤器
-1.通过注解
-12345678910111213141516171819202122232425......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-09-10
-        </p>
-
-    </div>
-    <hr>
-    
 
 
         <!-- Pager -->
@@ -539,7 +537,7 @@ Filter过滤器可以用于过滤一些非法字符、权限检查等操作
                                             
                                     
                                         <a href="/tags/#Redis" title="Redis"
-                                            rel="6">
+                                            rel="8">
                                             Redis
                                         </a>
                                         
@@ -559,6 +557,11 @@ Filter过滤器可以用于过滤一些非法字符、权限检查等操作
                                         
                                             
                                     
+                                        <a href="/tags/#tomcat" title="tomcat"
+                                            rel="2">
+                                            tomcat
+                                        </a>
+                                        
                                             
                                     
                                         <a href="/tags/#Spring boot" title="Spring boot"

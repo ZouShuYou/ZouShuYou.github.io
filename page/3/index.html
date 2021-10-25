@@ -202,6 +202,33 @@
 
     <div class="post-preview">
 
+        <a href="/2021/05/21/Redis/Redis实战----哨兵机制/">
+            <h2 class="post-title">
+                Redis实战----哨兵机制
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本文介绍使用docker操作Redis哨兵机制相关内容
+
+还是使用 docker-compose 来测试 Redis 的哨兵机制。
+这里建议使用一个 docker-compose 来测试，我一开始是使用的两个 yaml 文件，会出现主节点挂掉之后，从节点无法切换为主节点的情况，搞了很久，后面看了下网上的说法，感觉应该是网络共享的问题。
+先建立一个文件夹测试哨兵机制，这边是我的目录结构
+12......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-05-21
+        </p>
+
+    </div>
+    <hr>
+    
+    <div class="post-preview">
+
         <a href="/2021/05/14/JVM/Java内存模型/">
             <h2 class="post-title">
                 Java内存模型
@@ -442,37 +469,6 @@ String字符串String是redis中最基本的数据类型，一个key对应一个
     </div>
     <hr>
     
-    <div class="post-preview">
-
-        <a href="/2021/04/18/Java Concurrent/阻塞队列BlockingQueue/">
-            <h2 class="post-title">
-                阻塞队列BlockingQueue
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍BlockingQueue阻塞队列相关知识
-
-简介BlockingQueue是JUC包下的一个接口，通常用于一个线程生产对象，而另外一个线程消费这些对象的场景。
-方法：BlockingQueue继承Queue接口，因此，对数据元素的基本操作有：
-
-插入元素
-
-
-add(E e) ：往队列插入数据，当队列满时，插入元素时会抛出IllegalStateException异常；
-offe......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-04-18
-        </p>
-
-    </div>
-    <hr>
-    
 
 
         <!-- Pager -->
@@ -570,6 +566,11 @@ offe......
                                         
                                             
                                     
+                                        <a href="/tags/#tomcat" title="tomcat"
+                                            rel="2">
+                                            tomcat
+                                        </a>
+                                        
                                             
                                     
                                         <a href="/tags/#Spring boot" title="Spring boot"
