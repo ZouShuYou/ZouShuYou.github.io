@@ -32,5 +32,22 @@ tags:
 
 我本机是成功解决了报上述错的问题。
 
+
+# JDK版本问题
+
+```xml
+java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
+```
+使用的镜像是 tomcat8.5 ，但是它是JDK11，会报上述错误
+
+原因：JAXB API是java EE 的API，因此在java SE 9.0 中不再包含这个 Jar 包。
+java 9 中引入了模块的概念，默认情况下，Java SE中将不再包含java EE 的Jar包
+而在 java 6/7 / 8 时关于这个API 都是捆绑在一起的
+
+# 解决方案
+
+降低 JDK 版本
+
 参考：
 [How to solve common problems when using Tomcat](https://ducmanhphan.github.io/2020-01-09-How-to-solve-common-problems-when-using-Tomcat/)
+[真正解决方案：java.lang.ClassNotFoundException: javax.xml.bind.JAXBException](https://blog.csdn.net/hadues/article/details/79188793)
