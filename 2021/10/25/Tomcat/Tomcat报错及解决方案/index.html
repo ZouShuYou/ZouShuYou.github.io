@@ -214,7 +214,11 @@
 <pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Context</span> <span class="token attr-name">docBase</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>&lt;yourApp><span class="token punctuation">"</span></span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/web<span class="token punctuation">"</span></span> <span class="token attr-name">reloadable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>我本机是成功解决了报上述错的问题。</p>
-<p>参考：<br><a target="_blank" rel="noopener" href="https://ducmanhphan.github.io/2020-01-09-How-to-solve-common-problems-when-using-Tomcat/">How to solve common problems when using Tomcat</a></p>
+<h1 id="JDK版本问题"><a href="#JDK版本问题" class="headerlink" title="JDK版本问题"></a>JDK版本问题</h1><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">java.lang.ClassNotFoundException: javax.xml.bind.JAXBException<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>使用的镜像是 tomcat8.5 ，但是它是JDK11，会报上述错误</p>
+<p>原因：JAXB API是java EE 的API，因此在java SE 9.0 中不再包含这个 Jar 包。<br>java 9 中引入了模块的概念，默认情况下，Java SE中将不再包含java EE 的Jar包<br>而在 java 6/7 / 8 时关于这个API 都是捆绑在一起的</p>
+<h1 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h1><p>降低 JDK 版本</p>
+<p>参考：<br><a target="_blank" rel="noopener" href="https://ducmanhphan.github.io/2020-01-09-How-to-solve-common-problems-when-using-Tomcat/">How to solve common problems when using Tomcat</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/hadues/article/details/79188793">真正解决方案：java.lang.ClassNotFoundException: javax.xml.bind.JAXBException</a></p>
 
 
                 <hr>
