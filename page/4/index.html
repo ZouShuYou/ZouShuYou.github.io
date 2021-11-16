@@ -202,6 +202,33 @@
 
     <div class="post-preview">
 
+        <a href="/2021/04/23/Redis/Redis相关知识----持久化/">
+            <h2 class="post-title">
+                Redis相关知识----持久化（RDB和AOF）
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本文介绍Redis的持久化相关知识
+
+简介Redis是基于内存的数据库，服务器一旦宕机，内存中的数据将全部丢失。
+通常的解决方案是从后端数据库恢复这些数据，但后端数据库有性能瓶颈，如果是大数据量的恢复，1、会对数据库带来巨大的压力，2、数据库的性能不如Redis。导致程序响应慢。
+所以对Redis来说，实现数据的持久化，避免从后端数据库中恢复数据，是至关重要的。
+Redis提供RDB和AO......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-04-23
+        </p>
+
+    </div>
+    <hr>
+    
+    <div class="post-preview">
+
         <a href="/2021/04/22/Modify/Hux主题添加搜索/">
             <h2 class="post-title">
                 Hux主题添加搜索
@@ -470,34 +497,6 @@ Mysql可以分为Server层和存储引擎层，不同的存储引擎公用一个
     </div>
     <hr>
     
-    <div class="post-preview">
-
-        <a href="/2021/04/01/Java Concurrent/Java线程池/">
-            <h2 class="post-title">
-                Java线程池相关知识
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍Java线程池相关知识
-
-前言线程池：线程池是一种基于池化思想管理线程的工具，经常出现再多线程服务器中。
-线程池解决的问题是什么：线程池解决的核心问题就是资源管理问题。在并发环境下，系统不能确定任意时刻，有多少任务需要执行，有多少资源需要投入。会存在下列问题：
-
-频繁申请/销毁资源和调度资源，将带来额外的消耗，可能会非常巨大。
-对资源无限申请缺乏抑制手段，可能会引发系统资源耗尽的风......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-04-01
-        </p>
-
-    </div>
-    <hr>
-    
 
 
         <!-- Pager -->
@@ -623,6 +622,8 @@ Mysql可以分为Server层和存储引擎层，不同的存储引擎公用一个
                                             Spring Cloud
                                         </a>
                                         
+                                            
+                                    
                                             
                                     
                                             

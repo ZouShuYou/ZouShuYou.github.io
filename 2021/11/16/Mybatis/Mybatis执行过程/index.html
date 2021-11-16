@@ -13,11 +13,11 @@
 
     <title>
         
-          吵架后记 - ShuYou&#39;s Blog
+          Mybatis执行过程 - ShuYou&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://shuyou.site/2021/11/04/Shuyou/吵架后记/">
+    <link rel="canonical" href="https://shuyou.site/2021/11/16/Mybatis/Mybatis执行过程/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -178,14 +178,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#记录" title="记录">记录</a>
+                          <a class="tag" href="/tags/#Mybatis" title="Mybatis">Mybatis</a>
                         
                     </div>
-                    <h1>吵架后记</h1>
+                    <h1>Mybatis执行过程</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Zsy on
-                        2021-11-04
+                        2021-11-16
                     </span>
                 </div>
             </div>
@@ -204,17 +204,31 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>11.3</p>
-<p>和她吵架了，这次比较严重，她想分手，可能这次吵架只是一个导火索而已。</p>
-<p>她觉得我对她不够好，说我不是有意识的，只是我性格和脾气的一部分。想想确实觉得自己对她不是很好。</p>
-<p>唉，昨晚失眠很久，发信息挽回。</p>
-<p>今天发短信挽回，她还是很生气，我知道她只是希望有时候我能哄她，包容她，照顾她。但是有时候我自己的情绪都很难照顾，所以顾及不上她。</p>
-<p>11.4</p>
-<p>道歉了很久，哄了她很久，她也不是那么生气了。</p>
-<p>我觉得我还是很喜欢她的，只是偶尔两个人有争论，有矛盾。</p>
-<p>11.7</p>
-<p>和好了，呜呜呜呜。</p>
-<p>这几天感觉开心了很多。</p>
+                <blockquote>
+<p>本文简单分析Mybatis的执行过程</p>
+</blockquote>
+<h2 id="重要类"><a href="#重要类" class="headerlink" title="重要类"></a>重要类</h2><ol>
+<li>SqlSession</li>
+<li>Configuration</li>
+<li>Excutor</li>
+<li>MappedStatement</li>
+<li>StatementHandler</li>
+</ol>
+<h2 id="从注入开始"><a href="#从注入开始" class="headerlink" title="从注入开始"></a>从注入开始</h2><p>spring boot使用mybatis，需要导入mybatis-spring-boot-starter包，该包会导入mybatis-spring-boot-autoconfigure包。</p>
+<p>MybatisAutoConfiguration类会自动注入 SqlSessionFactory ，注入MapperScannerConfigurer且会扫描dao包，注入其中标注@Mapper注解的接口。<br>如果是使用XML配置的，则会在 SqlSessionFactory（其实是SqlSessionFactoryBean类） 注入时，扫描xml配置，并添加到 Configuration 中。<br>会注入 SqlSessionTemplate ，该类包含一个SqlSession代理类。</p>
+<h2 id="MapperRegistry、MapperProxyFactory、MapperProxy"><a href="#MapperRegistry、MapperProxyFactory、MapperProxy" class="headerlink" title="MapperRegistry、MapperProxyFactory、MapperProxy"></a>MapperRegistry、MapperProxyFactory、MapperProxy</h2><p>Configuration中包含 MapperRegistry 属性。</p>
+<p>mapperRegistry有getMapper和addMapper方法，有一个map，用来保存mapper类和MapperProxyFactory。当需要的mapper在map中找不到时，会通过MapperProxyFactory生成一个代理mapper类。</p>
+<p>MapperProxyFactory是MapperProxy的工程类，可以生成MapperProxy代理类</p>
+<p>MapperProxy是Mapper代理类，相当于mapper接口的注入到容器的bean类型，使用mapper接口的方法时，会调到MapperProxy的invoke方法上，这里使用的是JDK代理。</p>
+<h2 id="SqlSessionTemplate、SqlSession"><a href="#SqlSessionTemplate、SqlSession" class="headerlink" title="SqlSessionTemplate、SqlSession"></a>SqlSessionTemplate、SqlSession</h2><p>MapperProxy的invoke方法会执行MapperMethod的invoke方法，之后根据sql语句类型继续向下执行，接着会调用SqlSessionTemplate上的方法，</p>
+<p>SqlSessionTemplate会调用代理的SqlSession类上的方法，这里是DefaultSqlSession。</p>
+<h2 id="Excutor"><a href="#Excutor" class="headerlink" title="Excutor"></a>Excutor</h2><p>MappedStatement包含很多属性，sql语句、返回结果等<br>DefaultSqlSession会调用Excutor继续执行相应的方法。</p>
+<h2 id="StatementHandler"><a href="#StatementHandler" class="headerlink" title="StatementHandler"></a>StatementHandler</h2><p>Excutor执行时，会调用相应的StatementHandler继续执行。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>大致的流程就是上述过程，还是挺复杂的。</p>
+<p><strong>参考</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46225886/article/details/113439372">SpringBoot中，Mybatis的执行流程源码解析</a></li>
+</ol>
 
 
                 <hr>
@@ -223,13 +237,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2021/11/16/Mybatis/Mybatis执行过程/" data-toggle="tooltip" data-placement="top" title="Mybatis执行过程">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2021/10/28/Spring Boot/SSM项目改造为Spring Boot项目/" data-toggle="tooltip" data-placement="top" title="SSM项目改造为Spring Boot项目">Next Post &rarr;</a>
+                            <a href="/2021/11/04/Shuyou/吵架后记/" data-toggle="tooltip" data-placement="top" title="吵架后记">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -256,7 +266,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#记录" title="记录">记录</a>
+                          <a class="tag" href="/tags/#Mybatis" title="Mybatis">Mybatis</a>
                         
                     </div>
                 </section>
