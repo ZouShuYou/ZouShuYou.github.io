@@ -207,6 +207,12 @@
                 <blockquote>
 <p>本文介绍怎么把SSM项目改造为Spring Boot项目</p>
 </blockquote>
+<h2 id="0-改造步骤"><a href="#0-改造步骤" class="headerlink" title="0.改造步骤"></a>0.改造步骤</h2><ol>
+<li>原ssm项目打成jar包</li>
+<li>将相关配置文件放到<strong>resources</strong>目录下</li>
+<li>将前端界面文件放到<strong>web</strong>目录下</li>
+<li>servlet 、 listener 和 Filter 要注册到容器中</li>
+</ol>
 <h2 id="1-Servlet"><a href="#1-Servlet" class="headerlink" title="1.Servlet"></a>1.Servlet</h2><p>SSM里使用的Servlet，要注册到容器中</p>
 <p>使用ServletRegistrationBean类或者使用注解@WebServlet</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Bean</span>

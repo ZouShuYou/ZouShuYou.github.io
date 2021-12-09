@@ -273,11 +273,14 @@ Mybat......
                 
 本文介绍怎么把SSM项目改造为Spring Boot项目
 
+0.改造步骤
+原ssm项目打成jar包
+将相关配置文件放到resources目录下
+将前端界面文件放到web目录下
+servlet 、 listener 和 Filter 要注册到容器中
+
 1.ServletSSM里使用的Servlet，要注册到容器中
-使用ServletRegistrationBean类或者使用注解@WebServlet
-@Bean
-public ServletRegistrationBean myServlet() &#123;
-    return new ServletRegistration......
+使用ServletRegistrationBean类或者使用注解@WebSer......
             </div>
         </a>
         <p class="post-meta">
