@@ -202,6 +202,39 @@
 
     <div class="post-preview">
 
+        <a href="/2021/04/07/Mysql/Mysql相关知识(一)/">
+            <h2 class="post-title">
+                Mysql相关知识（一）
+            </h2>
+            <h3 class="post-subtitle">
+                
+            </h3>
+            <div class="post-content-preview">
+                
+本文介绍Mysql相关知识，主要包括Mysql的基础架构、事务、索引和日志等知识。
+
+基础架构基础架构示意图：
+
+连接器：管理连接，权限验证
+查询缓存：命中则直接返回结果
+分析器：词法分析，语法分析
+优化器：执行计划生成，索引选择
+执行器：操作引擎，返回结果
+存储引擎：存储数据，提供读写接口
+
+Mysql可以分为Server层和存储引擎层，不同的存储引擎公用一个Server层，常见的存储引......
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by Zsy on
+                2021-04-07
+        </p>
+
+    </div>
+    <hr>
+    
+    <div class="post-preview">
+
         <a href="/2021/04/01/Java Concurrent/Java线程池/">
             <h2 class="post-title">
                 Java线程池相关知识
@@ -440,37 +473,6 @@ LinkedHashMap由哈希表+双向链表组成，它继承自HashMap，重写了Ha
     </div>
     <hr>
     
-    <div class="post-preview">
-
-        <a href="/2021/03/12/Java Concurrent/Java线程通信工具类的使用/">
-            <h2 class="post-title">
-                Java线程通信工具类的使用
-            </h2>
-            <h3 class="post-subtitle">
-                
-            </h3>
-            <div class="post-content-preview">
-                
-本文介绍一些Java线程常用通信工具类，主要介绍怎么使用。
-
-简介常见的线程间通信方法有：
-
-wait()和notify() +加锁机制synchronized和lock
-还有线程的join()方法
-Condition接口的awiat() 和 signAll()方法 + 加锁机制synchronized和lock
-生产者消费者模式
-
-这里介绍一些JDK中java.util.concurre......
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by Zsy on
-                2021-03-12
-        </p>
-
-    </div>
-    <hr>
-    
 
 
         <!-- Pager -->
@@ -596,6 +598,8 @@ Condition接口的awiat() 和 signAll()方法 + 加锁机制synchronized和lock
                                             Spring Cloud
                                         </a>
                                         
+                                            
+                                    
                                             
                                     
                                             
