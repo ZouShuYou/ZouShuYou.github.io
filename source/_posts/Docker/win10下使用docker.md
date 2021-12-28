@@ -21,7 +21,7 @@ tags:
 
 ## docker
 
-在wsl2中允许docker，需要下载docker官方提供的 [Docker Desktop]{https://docs.docker.com/desktop/windows/install/}
+在wsl2中允许docker，需要下载docker官方提供的 [Docker Desktop](https://docs.docker.com/desktop/windows/install/)
 
 ## windows terminal
 
