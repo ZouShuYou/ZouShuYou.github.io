@@ -98,16 +98,16 @@
                     
                         
                             <li>
-                                <a href="/archives/">
-                                    Archives
+                                <a href="/tags/">
+                                    Tags
                                 </a>
                             </li>
                         
                     
                         
                             <li>
-                                <a href="/tags/">
-                                    Tags
+                                <a href="/archives/">
+                                    Archives
                                 </a>
                             </li>
                         
@@ -208,48 +208,231 @@
 <p>本文介绍Mysql操作和语句相关知识，包括增删改查、建表、函数、过程等相关知识。</p>
 </blockquote>
 <h3 id="1-操作"><a href="#1-操作" class="headerlink" title="1.操作"></a>1.操作</h3><p><strong>连接Mysql</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">mysql</span> <span class="string">-h</span> <span class="string">主机地址</span> <span class="string">-u</span> <span class="string">用户名</span> <span class="string">-p</span> <span class="string">密码</span></span><br><span class="line"></span><br><span class="line"><span class="string">本地连接：</span></span><br><span class="line"><span class="string">mysql</span> <span class="string">-u</span> <span class="string">root</span> <span class="string">-p</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">mysql <span class="token punctuation">-</span>h 主机地址 <span class="token punctuation">-</span>u 用户名 <span class="token punctuation">-</span>p 密码
+
+本地连接：
+mysql <span class="token punctuation">-</span>u root <span class="token punctuation">-</span>p<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>修改密码</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">mysqladmin</span> <span class="string">-u</span> <span class="string">用户名</span> <span class="string">-p</span> <span class="string">旧密码</span> <span class="string">password</span> <span class="string">新密码</span></span><br><span class="line"></span><br><span class="line"><span class="string">或者</span></span><br><span class="line"></span><br><span class="line"><span class="string">alter</span> <span class="string">user</span> <span class="string">`username`@`host`</span> <span class="string">identified</span> <span class="string">by</span> <span class="string">&#x27;password&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">mysqladmin <span class="token punctuation">-</span>u 用户名 <span class="token punctuation">-</span>p 旧密码 password 新密码
+
+或者
+
+alter user `username`@`host` identified by 'password'<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>增加权限</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">grant</span> <span class="string">all</span> <span class="string">privileges</span> <span class="string">on</span> <span class="string">databasename.tablename</span> <span class="string">to</span> <span class="string">用户名@登录主机</span> <span class="string">identified</span> <span class="string">by</span> <span class="string">密码</span></span><br><span class="line"></span><br><span class="line"><span class="string">增加一个用户</span> <span class="string">test1</span> <span class="string">密码为</span> <span class="string">abc，让他可以在任何主机上登录，并对所有数据库</span></span><br><span class="line"><span class="string">有查询、插入、修改、删除的权限：</span></span><br><span class="line"></span><br><span class="line"><span class="string">grant</span> <span class="string">select,insert,update,delete</span> <span class="string">on</span> <span class="string">.</span> <span class="string">to</span> <span class="string">`test1`@`localhost`</span> <span class="string">identified</span> <span class="string">by</span> <span class="string">&quot;abc&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">grant all privileges on databasename.tablename to 用户名@登录主机 identified by 密码
+
+增加一个用户 test1 密码为 abc，让他可以在任何主机上登录，并对所有数据库
+有查询、插入、修改、删除的权限：
+
+grant select<span class="token punctuation">,</span>insert<span class="token punctuation">,</span>update<span class="token punctuation">,</span>delete on . to `test1`@`localhost` identified by "abc"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>删除授权</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">revoke</span> <span class="string">all</span> <span class="string">privileges</span> <span class="string">on</span>  <span class="string">databasename.tablename</span> <span class="string">from</span> <span class="string">`username`@`host`</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">revoke all privileges on  databasename.tablename from `username`@`host`<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><strong>创建用户</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">create</span> <span class="string">user</span> <span class="string">`username`@`host`</span> <span class="string">identified</span> <span class="string">by</span> <span class="string">&#x27;password&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="string">要求使用ssl登录</span></span><br><span class="line"><span class="string">create</span> <span class="string">user</span> <span class="string">`username`@`host`</span> <span class="string">identified</span> <span class="string">by</span> <span class="string">&#x27;password&#x27;</span> <span class="string">require</span> <span class="string">ssl;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">create user `username`@`host` identified by 'password'
+
+要求使用ssl登录
+create user `username`@`host` identified by 'password' require ssl;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>锁定用户</strong></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">alter</span> <span class="string">user</span> <span class="string">`username`@`host`</span> <span class="string">account</span> <span class="string">lock;</span></span><br><span class="line"></span><br><span class="line"><span class="string">解锁</span></span><br><span class="line"><span class="string">alter</span> <span class="string">user</span> <span class="string">`username`@`host`</span> <span class="string">account</span> <span class="string">unlock;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">alter user `username`@`host` account lock;
+
+解锁
+alter user `username`@`host` account unlock;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>删除用户</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">drop</span> <span class="string">user</span> <span class="string">`username`@`host`</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">drop user `username`@`host`<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 <h3 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2.常用命令"></a>2.常用命令</h3><p><strong>数据库</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">show</span> <span class="string">databases;</span> <span class="comment">#显示数据库</span></span><br><span class="line"></span><br><span class="line"><span class="string">create</span> <span class="string">database</span> [<span class="string">if</span> <span class="string">not</span> <span class="string">exists</span>] <span class="string">t</span> [<span class="string">character</span> <span class="string">set=&#x27;utf8&#x27;</span>]<span class="string">;</span> <span class="comment">#建数据库</span></span><br><span class="line"></span><br><span class="line"><span class="string">use</span> <span class="string">t;</span> <span class="comment">#使用数据库</span></span><br><span class="line"></span><br><span class="line"><span class="string">drop</span> <span class="string">database</span> <span class="string">t;</span> <span class="comment">#删除数据库</span></span><br><span class="line"></span><br><span class="line"><span class="string">show</span> <span class="string">tables;</span> <span class="comment">#显示表</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#建表</span></span><br><span class="line"><span class="string">CREATE</span> <span class="string">TABLE</span> <span class="string">`T`</span> <span class="string">(</span></span><br><span class="line">  <span class="string">`id`</span> <span class="string">int</span> <span class="string">NOT</span> <span class="literal">NULL</span> <span class="string">AUTO_INCREMENT,</span></span><br><span class="line">  <span class="string">`a`</span> <span class="string">varchar(30)</span> <span class="string">DEFAULT</span> <span class="literal">NULL</span><span class="string">,</span></span><br><span class="line">  <span class="string">`b`</span> <span class="string">int</span> <span class="string">DEFAULT</span> <span class="literal">NULL</span><span class="string">,</span></span><br><span class="line">  <span class="string">PRIMARY</span> <span class="string">KEY</span> <span class="string">(`id`),</span></span><br><span class="line">  <span class="string">UNIQUE</span> <span class="string">KEY</span> <span class="string">`a`</span> <span class="string">(`a`),</span></span><br><span class="line">  <span class="string">KEY</span> <span class="string">`b`</span> <span class="string">(`b`)</span></span><br><span class="line"><span class="string">)</span> <span class="string">ENGINE=InnoDB</span> <span class="string">DEFAULT</span> <span class="string">CHARSET=utf8</span> <span class="string">COLLATE=utf8_bin;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看建表语句</span></span><br><span class="line"><span class="string">show</span> <span class="string">create</span> <span class="string">table</span> <span class="string">`T`;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#显示表结构</span></span><br><span class="line"><span class="string">desc</span> <span class="string">T;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除表</span></span><br><span class="line"><span class="string">drop</span> <span class="string">table</span> [<span class="string">if</span> <span class="string">exists</span>] <span class="string">T;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">show databases; <span class="token comment">#显示数据库</span>
+
+create database <span class="token punctuation">[</span>if not exists<span class="token punctuation">]</span> t <span class="token punctuation">[</span>character set='utf8'<span class="token punctuation">]</span>; <span class="token comment">#建数据库</span>
+
+use t; <span class="token comment">#使用数据库</span>
+
+drop database t; <span class="token comment">#删除数据库</span>
+
+show tables; <span class="token comment">#显示表</span>
+
+<span class="token comment">#建表</span>
+CREATE TABLE `T` (
+  `id` int NOT NULL AUTO_INCREMENT<span class="token punctuation">,</span>
+  `a` varchar(30) DEFAULT NULL<span class="token punctuation">,</span>
+  `b` int DEFAULT NULL<span class="token punctuation">,</span>
+  PRIMARY KEY (`id`)<span class="token punctuation">,</span>
+  UNIQUE KEY `a` (`a`)<span class="token punctuation">,</span>
+  KEY `b` (`b`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+<span class="token comment">#查看建表语句</span>
+show create table `T`;
+
+<span class="token comment">#显示表结构</span>
+desc T;
+
+<span class="token comment">#删除表</span>
+drop table <span class="token punctuation">[</span>if exists<span class="token punctuation">]</span> T;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>表复制、备份、清除</strong></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#会造成索引丢失，只有表结构，没有主键等信息。</span></span><br><span class="line"><span class="string">create</span> <span class="string">table</span> <span class="string">新表名</span> <span class="string">select</span> <span class="string">*</span> <span class="string">from</span> <span class="string">T;</span></span><br><span class="line"><span class="string">或</span></span><br><span class="line"><span class="string">create</span> <span class="string">table</span> <span class="string">新表名</span> <span class="string">as(select</span> <span class="string">*</span> <span class="string">from</span> <span class="string">T);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#讲旧表中的数据移入新表</span></span><br><span class="line"><span class="string">insert</span> <span class="string">into</span> <span class="string">新表</span> <span class="string">select</span> <span class="string">*</span> <span class="string">from</span> <span class="string">T;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#清空表数据</span></span><br><span class="line"><span class="string">truncate</span> <span class="string">table</span> <span class="string">T;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment">#会造成索引丢失，只有表结构，没有主键等信息。</span>
+create table 新表名 select * from T;
+或
+create table 新表名 as(select * from T);
+
+<span class="token comment">#讲旧表中的数据移入新表</span>
+insert into 新表 select * from T;
+
+<span class="token comment">#清空表数据</span>
+truncate table T;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>表相关操作</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改列名</span></span><br><span class="line"><span class="string">alter</span> <span class="string">table</span> <span class="string">T</span> <span class="string">change</span> <span class="string">&lt;原字段名称&gt;</span> <span class="string">&lt;新字段名称</span> <span class="string">字段类型&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#修改表名</span></span><br><span class="line"><span class="string">alter</span> <span class="string">table</span> <span class="string">T</span> <span class="string">rename</span> <span class="string">newT</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#修改字段类型及指定是否为空</span></span><br><span class="line"><span class="string">alter</span> <span class="string">table</span> <span class="string">T</span> <span class="string">modify(or</span> <span class="string">change)</span> <span class="string">&lt;字段名称&gt;</span> <span class="string">&lt;字段类型&gt;</span> [<span class="string">not</span> <span class="literal">null</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#增加一个字段</span></span><br><span class="line"><span class="string">alter</span> <span class="string">table</span> <span class="string">T</span> <span class="string">add</span> <span class="string">column</span> <span class="string">字段名称</span> <span class="string">字段类型</span> <span class="string">(after</span> <span class="string">某个字段)</span> <span class="string">(first)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除字段</span></span><br><span class="line"><span class="string">alter</span> <span class="string">table</span> <span class="string">&lt;表名称&gt;</span> <span class="string">drop</span> <span class="string">column</span> <span class="string">&lt;列名&gt;;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment">#修改列名</span>
+alter table T change &lt;原字段名称<span class="token punctuation">></span> &lt;新字段名称 字段类型<span class="token punctuation">></span>
+
+<span class="token comment">#修改表名</span>
+alter table T rename newT
+
+<span class="token comment">#修改字段类型及指定是否为空</span>
+alter table T modify(or change) &lt;字段名称<span class="token punctuation">></span> &lt;字段类型<span class="token punctuation">></span> <span class="token punctuation">[</span>not null<span class="token punctuation">]</span>
+
+<span class="token comment">#增加一个字段</span>
+alter table T add column 字段名称 字段类型 (after 某个字段) (first)
+
+<span class="token comment">#删除字段</span>
+alter table &lt;表名称<span class="token punctuation">></span> drop column &lt;列名<span class="token punctuation">></span>;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>查表</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">SELECT</span> [<span class="string">DISTINCT</span>] <span class="string">&lt;字段名称,用逗号隔开/*&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="string">FROM</span> <span class="string">&lt;left_table&gt;</span> [<span class="string">&lt;join_type&gt;</span> <span class="string">JOIN</span> <span class="string">&lt;right_table&gt;</span> <span class="string">ON</span> <span class="string">&lt;连接条件&gt;</span>]</span><br><span class="line"></span><br><span class="line"><span class="string">WHERE</span> <span class="string">&lt;where条件&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="string">GROUP</span> <span class="string">BY</span> <span class="string">&lt;分组字段&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="string">HAVING</span> <span class="string">&lt;筛选条件&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="string">ORDER</span> <span class="string">BY</span> <span class="string">&lt;排序条件&gt;</span> [<span class="string">desc/asc</span>]</span><br><span class="line"></span><br><span class="line"><span class="string">LIMIT</span> <span class="string">n[,</span> <span class="string">m]</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">SELECT <span class="token punctuation">[</span>DISTINCT<span class="token punctuation">]</span> &lt;字段名称<span class="token punctuation">,</span>用逗号隔开/<span class="token important">*></span>
+
+FROM &lt;left_table<span class="token punctuation">></span> <span class="token punctuation">[</span>&lt;join_type<span class="token punctuation">></span> JOIN &lt;right_table<span class="token punctuation">></span> ON &lt;连接条件<span class="token punctuation">></span><span class="token punctuation">]</span>
+
+WHERE &lt;where条件<span class="token punctuation">></span>
+
+GROUP BY &lt;分组字段<span class="token punctuation">></span>
+
+HAVING &lt;筛选条件<span class="token punctuation">></span>
+
+ORDER BY &lt;排序条件<span class="token punctuation">></span> <span class="token punctuation">[</span>desc/asc<span class="token punctuation">]</span>
+
+LIMIT n<span class="token punctuation">[</span><span class="token punctuation">,</span> m<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>增改删</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#增加数据</span></span><br><span class="line"><span class="string">insert</span> <span class="string">into</span> <span class="string">T</span> <span class="string">values();</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#更改数据</span></span><br><span class="line"><span class="string">update</span> <span class="string">T</span> <span class="string">set</span> <span class="string">***</span> <span class="string">where</span> <span class="string">**</span> <span class="string">=</span> <span class="string">**</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除数据</span></span><br><span class="line"><span class="string">delete</span> <span class="string">FROM</span> <span class="string">T</span> <span class="string">WHERE</span> <span class="string">**</span> <span class="string">=</span> <span class="string">**</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment">#增加数据</span>
+insert into T values();
+
+<span class="token comment">#更改数据</span>
+update T set <span class="token important">***</span> where <span class="token important">**</span> = <span class="token important">**</span>
+
+<span class="token comment">#删除数据</span>
+delete FROM T WHERE <span class="token important">**</span> = <span class="token important">**</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>索引</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建索引</span></span><br><span class="line"><span class="string">--</span> <span class="string">普通索引</span></span><br><span class="line"><span class="string">ALTER</span> <span class="string">TABLE</span> <span class="string">表名称</span> <span class="string">ADD</span> <span class="string">INDEX</span> <span class="string">index_name</span> <span class="string">(column_list)</span></span><br><span class="line"><span class="string">--</span> <span class="string">唯一索引</span></span><br><span class="line"><span class="string">ALTER</span> <span class="string">TABLE</span> <span class="string">表名称</span> <span class="string">ADD</span> <span class="string">UNIQUE</span> <span class="string">(column_list)</span></span><br><span class="line"><span class="string">--</span> <span class="string">主键索引</span></span><br><span class="line"><span class="string">ALTER</span> <span class="string">TABLE</span> <span class="string">表名称</span> <span class="string">ADD</span> <span class="string">PRIMARY</span> <span class="string">KEY</span> <span class="string">(column_list)</span></span><br><span class="line"></span><br><span class="line"><span class="string">或者</span></span><br><span class="line"><span class="string">CREATE</span> <span class="string">INDEX</span> <span class="string">index_name</span> <span class="string">ON</span> <span class="string">表名称</span> <span class="string">(column_list)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除索引</span></span><br><span class="line"><span class="string">DROP</span> <span class="string">INDEX</span> <span class="string">index_name</span> <span class="string">ON</span> <span class="string">表名称;</span></span><br><span class="line"><span class="string">ALTER</span> <span class="string">TABLE</span> <span class="string">表名称</span> <span class="string">DROP</span> <span class="string">INDEX</span> <span class="string">index_name;</span></span><br><span class="line"><span class="comment">#删除主键</span></span><br><span class="line"><span class="string">alter</span> <span class="string">table</span> <span class="string">T</span> <span class="string">drop</span> <span class="string">primary</span> <span class="string">key;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看索引</span></span><br><span class="line"><span class="string">show</span> <span class="string">index</span> <span class="string">from</span> <span class="string">T;</span></span><br><span class="line"><span class="string">show</span> <span class="string">keys</span> <span class="string">from</span> <span class="string">T;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment">#创建索引</span>
+<span class="token punctuation">-</span><span class="token punctuation">-</span> 普通索引
+ALTER TABLE 表名称 ADD INDEX index_name (column_list)
+<span class="token punctuation">-</span><span class="token punctuation">-</span> 唯一索引
+ALTER TABLE 表名称 ADD UNIQUE (column_list)
+<span class="token punctuation">-</span><span class="token punctuation">-</span> 主键索引
+ALTER TABLE 表名称 ADD PRIMARY KEY (column_list)
+
+或者
+CREATE INDEX index_name ON 表名称 (column_list)
+
+<span class="token comment">#删除索引</span>
+DROP INDEX index_name ON 表名称;
+ALTER TABLE 表名称 DROP INDEX index_name;
+<span class="token comment">#删除主键</span>
+alter table T drop primary key;
+
+<span class="token comment">#查看索引</span>
+show index from T;
+show keys from T;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>变量</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看满足条件的部分系统变量</span></span><br><span class="line"><span class="string">show</span> <span class="string">global</span> <span class="string">|</span> <span class="string">session</span> <span class="string">variables</span> <span class="string">like</span> <span class="string">&#x27;%char%&#x27;</span><span class="string">;</span></span><br><span class="line"><span class="string">查看指定的某个系统变量的值</span></span><br><span class="line"><span class="string">select</span> <span class="string">@@global|session.系统变量名;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#为某个系统变量赋值</span></span><br><span class="line"><span class="string">set</span> <span class="string">global|session</span> <span class="string">系统变量名</span> <span class="string">=</span> <span class="string">值;</span></span><br><span class="line"><span class="string">或</span></span><br><span class="line"><span class="string">set</span> <span class="string">@@global|session.系统变量名</span> <span class="string">=</span> <span class="string">值;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#用户变量声明并初始化</span></span><br><span class="line"><span class="string">set</span> <span class="string">@用户变量名=值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用</span></span><br><span class="line"><span class="string">select</span> <span class="string">@用户变量名</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#声明局部变量</span></span><br><span class="line"><span class="string">declare</span> <span class="string">变量名</span> <span class="string">类型;</span></span><br><span class="line"><span class="string">declare</span> <span class="string">变量名</span> <span class="string">类型</span> <span class="string">default</span> <span class="string">值;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#赋值和使用同用户变量一样</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment">#查看满足条件的部分系统变量</span>
+show global <span class="token punctuation">|</span> session variables like '%char%';
+查看指定的某个系统变量的值
+select @@global<span class="token punctuation">|</span>session.系统变量名;
+
+<span class="token comment">#为某个系统变量赋值</span>
+set global<span class="token punctuation">|</span>session 系统变量名 = 值;
+或
+set @@global<span class="token punctuation">|</span>session.系统变量名 = 值;
+
+<span class="token comment">#用户变量声明并初始化</span>
+set @用户变量名=值
+
+<span class="token comment">#使用</span>
+select @用户变量名
+
+<span class="token comment">#声明局部变量</span>
+declare 变量名 类型;
+declare 变量名 类型 default 值;
+
+<span class="token comment">#赋值和使用同用户变量一样</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>存储过程</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建存储过程</span></span><br><span class="line"><span class="string">create</span> <span class="string">procedure</span> <span class="string">存储过程名(参数列表)</span></span><br><span class="line"><span class="string">begin</span></span><br><span class="line">	<span class="string">方法体(一组合法的sql语句)</span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#存储过程的结尾可以使用delimiter重新设置</span></span><br><span class="line"><span class="string">delimiter</span> <span class="string">结束标志</span></span><br><span class="line"><span class="string">例：</span></span><br><span class="line"><span class="string">delimiter</span> <span class="string">$</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#创建过程</span></span><br><span class="line"><span class="string">delimiter</span> <span class="string">;;</span></span><br><span class="line"><span class="string">create</span> <span class="string">procedure</span> <span class="string">idata()</span></span><br><span class="line"><span class="string">begin</span></span><br><span class="line">  <span class="string">declare</span> <span class="string">i</span> <span class="string">int;</span></span><br><span class="line">  <span class="string">set</span> <span class="string">i=1;</span></span><br><span class="line">  <span class="string">while(i&lt;=100000)do</span></span><br><span class="line">    <span class="string">insert</span> <span class="string">into</span> <span class="string">t</span> <span class="string">values(i,</span> <span class="string">i,</span> <span class="string">i);</span></span><br><span class="line">    <span class="string">set</span> <span class="string">i=i+1;</span></span><br><span class="line">  <span class="string">end</span> <span class="string">while;</span></span><br><span class="line"><span class="string">end;;</span></span><br><span class="line"><span class="string">delimiter</span> <span class="string">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#调用</span></span><br><span class="line"><span class="string">call</span> <span class="string">idata();</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看存储过程</span></span><br><span class="line"><span class="string">show</span> <span class="string">create</span> <span class="string">procedure</span> <span class="string">存储过程名;</span></span><br><span class="line"><span class="comment">#删除存储过程</span></span><br><span class="line"><span class="string">drop</span> <span class="string">procedure</span> <span class="string">存储过程名;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment">#创建存储过程</span>
+create procedure 存储过程名(参数列表)
+begin
+	方法体(一组合法的sql语句)
+end
+
+<span class="token comment">#存储过程的结尾可以使用delimiter重新设置</span>
+delimiter 结束标志
+例：
+delimiter $
+
+<span class="token comment">#创建过程</span>
+delimiter ;;
+create procedure idata()
+begin
+  declare i int;
+  set i=1;
+  while(i&lt;=100000)do
+    insert into t values(i<span class="token punctuation">,</span> i<span class="token punctuation">,</span> i);
+    set i=i+1;
+  end while;
+end;;
+delimiter ;
+
+<span class="token comment">#调用</span>
+call idata();
+
+<span class="token comment">#查看存储过程</span>
+show create procedure 存储过程名;
+<span class="token comment">#删除存储过程</span>
+drop procedure 存储过程名;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>函数</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建函数</span></span><br><span class="line"><span class="string">create</span> <span class="string">function</span> <span class="string">函数名（参数列表）returns</span> <span class="string">返回类型</span></span><br><span class="line"><span class="string">begin</span></span><br><span class="line"><span class="string">函数体</span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"></span><br><span class="line"><span class="string">注意事项：</span></span><br><span class="line"><span class="number">1</span><span class="string">.参数列表包含两部分：参数名</span> <span class="string">参数类型</span></span><br><span class="line"><span class="number">2</span><span class="string">.函数体：必须要有return语句，没有回报错。如果return语句没有放在函数体的最后也不报错，但不建议</span></span><br><span class="line"><span class="number">3.</span><span class="string">begin</span> <span class="string">end用法与存储过程相同，</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#调用语法</span></span><br><span class="line"><span class="string">select</span> <span class="string">函数名（参数列表）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#例</span></span><br><span class="line"><span class="string">create</span> <span class="string">function</span> <span class="string">myfunc()</span> <span class="string">returns</span> <span class="string">int</span></span><br><span class="line"><span class="string">begin</span></span><br><span class="line">	<span class="string">declare</span> <span class="string">c</span> <span class="string">int</span> <span class="string">default</span> <span class="number">0</span><span class="string">;</span></span><br><span class="line">	<span class="string">select</span> <span class="string">count(*)</span> <span class="string">into</span> <span class="string">c</span></span><br><span class="line">	<span class="string">from</span> <span class="string">T;</span></span><br><span class="line">	<span class="string">return</span> <span class="string">c;</span></span><br><span class="line"><span class="string">end;</span></span><br><span class="line"></span><br><span class="line"><span class="string">select</span> <span class="string">myfunc();</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看函数</span></span><br><span class="line"><span class="string">show</span> <span class="string">create</span> <span class="string">function</span> <span class="string">函数名;</span></span><br><span class="line"><span class="comment">#删除函数</span></span><br><span class="line"><span class="string">drop</span> <span class="string">function</span> <span class="string">函数名;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment">#创建函数</span>
+create function 函数名（参数列表）returns 返回类型
+begin
+函数体
+end
+
+注意事项：
+1.参数列表包含两部分：参数名 参数类型
+2.函数体：必须要有return语句，没有回报错。如果return语句没有放在函数体的最后也不报错，但不建议
+3.begin end用法与存储过程相同，
+
+<span class="token comment">#调用语法</span>
+select 函数名（参数列表）
+
+<span class="token comment">#例</span>
+create function myfunc() returns int
+begin
+	declare c int default 0;
+	select count(<span class="token important">*)</span> into c
+	from T;
+	return c;
+end;
+
+select myfunc();
+
+<span class="token comment">#查看函数</span>
+show create function 函数名;
+<span class="token comment">#删除函数</span>
+drop function 函数名;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>参考</strong>：</p>
 <ol>
@@ -361,7 +544,7 @@
 
                     Theme by <a target="_blank" rel="noopener" href="http://huangxuan.me">Hux</a> |                        
                     Power by <a href="https://shuyou.site">ShuYou</a> <br>
-                    Copyright &copy; ShuYou&#39;s Blog 2021 |
+                    Copyright &copy; ShuYou&#39;s Blog 2022 |
                     <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">鄂ICP备2020016977号-1</a>
                     
                 </p>

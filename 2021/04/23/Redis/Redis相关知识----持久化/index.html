@@ -98,16 +98,16 @@
                     
                         
                             <li>
-                                <a href="/archives/">
-                                    Archives
+                                <a href="/tags/">
+                                    Tags
                                 </a>
                             </li>
                         
                     
                         
                             <li>
-                                <a href="/tags/">
-                                    Tags
+                                <a href="/archives/">
+                                    Archives
                                 </a>
                             </li>
                         
@@ -225,7 +225,31 @@
 <li>默认情况下执行shutdown命令时，如果没有开启aof持久化，那么也会触发bgsave操作；</li>
 </ul>
 <p>redis.conf中RDB相关配置：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 周期性执行条件的设置格式为</span></span><br><span class="line"><span class="string">save</span> <span class="string">&lt;seconds&gt;</span> <span class="string">&lt;changes&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认的设置为：</span></span><br><span class="line"><span class="string">save</span> <span class="number">900</span> <span class="number">1</span></span><br><span class="line"><span class="string">save</span> <span class="number">300</span> <span class="number">10</span></span><br><span class="line"><span class="string">save</span> <span class="number">60</span> <span class="number">10000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下设置方式为关闭RDB快照功能</span></span><br><span class="line"><span class="string">save</span> <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件名称</span></span><br><span class="line"><span class="string">dbfilename</span> <span class="string">dump.rdb</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件保存路径</span></span><br><span class="line"><span class="string">dir</span> <span class="string">/home/work/app/redis/data/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果持久化出错，主进程是否停止写入</span></span><br><span class="line"><span class="string">stop-writes-on-bgsave-error</span> <span class="literal">yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否压缩</span></span><br><span class="line"><span class="string">rdbcompression</span> <span class="literal">yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入时是否检查</span></span><br><span class="line"><span class="string">rdbchecksum</span> <span class="literal">yes</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># 周期性执行条件的设置格式为</span>
+save &lt;seconds<span class="token punctuation">></span> &lt;changes<span class="token punctuation">></span>
+
+<span class="token comment"># 默认的设置为：</span>
+save 900 1
+save 300 10
+save 60 10000
+
+<span class="token comment"># 以下设置方式为关闭RDB快照功能</span>
+save ""
+
+<span class="token comment"># 文件名称</span>
+dbfilename dump.rdb
+
+<span class="token comment"># 文件保存路径</span>
+dir /home/work/app/redis/data/
+
+<span class="token comment"># 如果持久化出错，主进程是否停止写入</span>
+stop<span class="token punctuation">-</span>writes<span class="token punctuation">-</span>on<span class="token punctuation">-</span>bgsave<span class="token punctuation">-</span>error yes
+
+<span class="token comment"># 是否压缩</span>
+rdbcompression yes
+
+<span class="token comment"># 导入时是否检查</span>
+rdbchecksum yes<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>主线程在保证写操作的情况下，RDB如何保证数据一致性？</strong></p>
 <p>RDB中的核心思路是Copy-on-Write，来保证在进行快照操作的这段时间，需要压缩写入磁盘上的数据在内存中不会发生变化。</p>
@@ -262,7 +286,35 @@
 <li><strong>文件写入和同步</strong> 关于何时将 aof_buf 缓冲区的内容写入AOF文件中，Redis提供了三种写回策略：<br><img src="https://img-blog.csdnimg.cn/20210423170738841.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NhcnJvdFpzeQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
 </ul>
 <p><strong>redis.conf中配置AOF</strong></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#默认情况下，Redis是没有开启AOF的，可以通过配置redis.conf文件来开启AOF持久化，关于AOF的配置如下：</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># appendonly参数开启AOF持久化</span></span><br><span class="line"><span class="string">appendonly</span> <span class="literal">no</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># AOF持久化的文件名，默认是appendonly.aof</span></span><br><span class="line"><span class="string">appendfilename</span> <span class="string">&quot;appendonly.aof&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># AOF文件的保存位置和RDB文件的位置相同，都是通过dir参数设置的</span></span><br><span class="line"><span class="string">dir</span> <span class="string">./</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同步策略</span></span><br><span class="line"><span class="comment"># appendfsync always</span></span><br><span class="line"><span class="string">appendfsync</span> <span class="string">everysec</span></span><br><span class="line"><span class="comment"># appendfsync no</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># aof重写期间是否同步</span></span><br><span class="line"><span class="literal">no</span><span class="string">-appendfsync-on-rewrite</span> <span class="literal">no</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重写触发配置</span></span><br><span class="line"><span class="string">auto-aof-rewrite-percentage</span> <span class="number">100</span></span><br><span class="line"><span class="string">auto-aof-rewrite-min-size</span> <span class="string">64mb</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载aof出错如何处理</span></span><br><span class="line"><span class="string">aof-load-truncated</span> <span class="literal">yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件重写策略</span></span><br><span class="line"><span class="string">aof-rewrite-incremental-fsync</span> <span class="literal">yes</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment">#默认情况下，Redis是没有开启AOF的，可以通过配置redis.conf文件来开启AOF持久化，关于AOF的配置如下：</span>
+
+<span class="token comment"># appendonly参数开启AOF持久化</span>
+appendonly no
+
+<span class="token comment"># AOF持久化的文件名，默认是appendonly.aof</span>
+appendfilename "appendonly.aof"
+
+<span class="token comment"># AOF文件的保存位置和RDB文件的位置相同，都是通过dir参数设置的</span>
+dir ./
+
+<span class="token comment"># 同步策略</span>
+<span class="token comment"># appendfsync always</span>
+appendfsync everysec
+<span class="token comment"># appendfsync no</span>
+
+<span class="token comment"># aof重写期间是否同步</span>
+no<span class="token punctuation">-</span>appendfsync<span class="token punctuation">-</span>on<span class="token punctuation">-</span>rewrite no
+
+<span class="token comment"># 重写触发配置</span>
+auto<span class="token punctuation">-</span>aof<span class="token punctuation">-</span>rewrite<span class="token punctuation">-</span>percentage 100
+auto<span class="token punctuation">-</span>aof<span class="token punctuation">-</span>rewrite<span class="token punctuation">-</span>min<span class="token punctuation">-</span>size 64mb
+
+<span class="token comment"># 加载aof出错如何处理</span>
+aof<span class="token punctuation">-</span>load<span class="token punctuation">-</span>truncated yes
+
+<span class="token comment"># 文件重写策略</span>
+aof<span class="token punctuation">-</span>rewrite<span class="token punctuation">-</span>incremental<span class="token punctuation">-</span>fsync yes
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>AOF重写机制</strong></p>
 <p>AOF会记录每个写命令到AOF文件，随着时间越来越长，AOF文件会变得越来越大。如果不加以控制，会对Redis服务器，甚至对操作系统造成影响，而且AOF文件越大，数据恢复也越慢。</p>
@@ -410,7 +462,7 @@
 
                     Theme by <a target="_blank" rel="noopener" href="http://huangxuan.me">Hux</a> |                        
                     Power by <a href="https://shuyou.site">ShuYou</a> <br>
-                    Copyright &copy; ShuYou&#39;s Blog 2021 |
+                    Copyright &copy; ShuYou&#39;s Blog 2022 |
                     <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">鄂ICP备2020016977号-1</a>
                     
                 </p>

@@ -98,16 +98,16 @@
                     
                         
                             <li>
-                                <a href="/archives/">
-                                    Archives
+                                <a href="/tags/">
+                                    Tags
                                 </a>
                             </li>
                         
                     
                         
                             <li>
-                                <a href="/tags/">
-                                    Tags
+                                <a href="/archives/">
+                                    Archives
                                 </a>
                             </li>
                         
@@ -211,10 +211,31 @@
 <p>Redis的每种对象其实都由对象结构(redisObject) 与 对应编码的数据结构组合而成，而每种对象类型对应若干编码方式，不同的编码方式所对应的底层数据结构是不同的。<br><img src="https://img-blog.csdnimg.cn/20210421170649889.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NhcnJvdFpzeQ==,size_16,color_FFFFFF,t_70" alt="Redis对象机制"></p>
 <p><strong>redisObject</strong>:<br>redisObject 是 Redis 类型系统的核心, 数据库中的每个键、值, 以及 Redis 本身处理的参数, 都表示为这种数据类型。<br><img src="https://img-blog.csdnimg.cn/20210421171948867.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NhcnJvdFpzeQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>其中type、encoding和ptr是最重要的三个属性。</p>
 <ul>
-<li>type记录了对象所保存的值的类型，它的值可能是以下常量中的一个：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> - 对象类型</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_STRING 0 <span class="comment">// 字符串</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_LIST 1 <span class="comment">// 列表</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_SET 2 <span class="comment">// 集合</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ZSET 3 <span class="comment">// 有序集</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_HASH 4 <span class="comment">// 哈希表</span></span></span><br></pre></td></tr></table></figure></li>
+<li>type记录了对象所保存的值的类型，它的值可能是以下常量中的一个：<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/*
+ - 对象类型
+*/</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_STRING <span class="token number">0</span> </span><span class="token comment">// 字符串</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_LIST <span class="token number">1</span> </span><span class="token comment">// 列表</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_SET <span class="token number">2</span> </span><span class="token comment">// 集合</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_ZSET <span class="token number">3</span> </span><span class="token comment">// 有序集</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_HASH <span class="token number">4</span> </span><span class="token comment">// 哈希表</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li>encoding记录了对象所保存的值的编码，它的值可能是以下常量中的一个：</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 对象编码</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_RAW 0     <span class="comment">/* Raw representation */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_INT 1     <span class="comment">/* Encoded as integer */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_HT 2      <span class="comment">/* Encoded as hash table */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_ZIPMAP 3  <span class="comment">/* 注意：版本2.6后不再使用. */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_LINKEDLIST 4 <span class="comment">/* 注意：不再使用了，旧版本2.x中String的底层之一. */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_ZIPLIST 5 <span class="comment">/* Encoded as ziplist */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_INTSET 6  <span class="comment">/* Encoded as intset */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_SKIPLIST 7  <span class="comment">/* Encoded as skiplist */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_EMBSTR 8  <span class="comment">/* Embedded sds string encoding */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_QUICKLIST 9 <span class="comment">/* Encoded as linked list of ziplists */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OBJ_ENCODING_STREAM 10 <span class="comment">/* Encoded as a radix tree of listpacks */</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/*
+* 对象编码
+*/</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_ENCODING_RAW <span class="token number">0</span>     </span><span class="token comment">/* Raw representation */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_ENCODING_INT <span class="token number">1</span>     </span><span class="token comment">/* Encoded as integer */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_ENCODING_HT <span class="token number">2</span>      </span><span class="token comment">/* Encoded as hash table */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_ENCODING_ZIPMAP <span class="token number">3</span>  </span><span class="token comment">/* 注意：版本2.6后不再使用. */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_ENCODING_LINKEDLIST <span class="token number">4</span> </span><span class="token comment">/* 注意：不再使用了，旧版本2.x中String的底层之一. */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_ENCODING_ZIPLIST <span class="token number">5</span> </span><span class="token comment">/* Encoded as ziplist */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_ENCODING_INTSET <span class="token number">6</span>  </span><span class="token comment">/* Encoded as intset */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_ENCODING_SKIPLIST <span class="token number">7</span>  </span><span class="token comment">/* Encoded as skiplist */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_ENCODING_EMBSTR <span class="token number">8</span>  </span><span class="token comment">/* Embedded sds string encoding */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_ENCODING_QUICKLIST <span class="token number">9</span> </span><span class="token comment">/* Encoded as linked list of ziplists */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">OBJ_ENCODING_STREAM <span class="token number">10</span> </span><span class="token comment">/* Encoded as a radix tree of listpacks */</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>ptr是一个指针，指向实际保存值的数据结构，这个数据结构由type和encoding属性决定。如果一个redisObject 的type 属性为OBJ_LIST ， encoding 属性为OBJ_ENCODING_QUICKLIST ，那么这个对象就是一个Redis 列表（List)，它的值保存在一个QuickList的数据结构内，而ptr 指针就指向quicklist的对象；</li>
@@ -347,7 +368,7 @@
 
                     Theme by <a target="_blank" rel="noopener" href="http://huangxuan.me">Hux</a> |                        
                     Power by <a href="https://shuyou.site">ShuYou</a> <br>
-                    Copyright &copy; ShuYou&#39;s Blog 2021 |
+                    Copyright &copy; ShuYou&#39;s Blog 2022 |
                     <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">鄂ICP备2020016977号-1</a>
                     
                 </p>

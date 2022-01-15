@@ -95,19 +95,19 @@
                         
                     
                         
-                            <li>
-                                <a href="/archives/">
-                                    Archives
-                                </a>
-                            </li>
-                        
-                    
-                        
                     
                         
                             <li>
                                 <a href="/tags/">
                                     Tags
+                                </a>
+                            </li>
+                        
+                    
+                        
+                            <li>
+                                <a href="/archives/">
+                                    Archives
                                 </a>
                             </li>
                         
@@ -321,10 +321,14 @@ Redis提供RDB和AO......
 本文介绍下给hux主题添加搜索功能，主要是抄 黄玄 的作业，可以去参考huxpro
 
 使用插件：hexo-generator-search
-1npm install hexo-generator-search --save
+npm install hexo-generator-search --save
 
 配置 _config.yml：
-12345search:  path: search.json  field: post  limit: 50  enable: tr......
+search:
+  path: search.json
+  field: post
+  limit: 50
+  enable: true......
             </div>
         </a>
         <p class="post-meta">
@@ -526,20 +530,17 @@ id：SQ......
                             <div class="tags">
                                 
                                     
-                                            
-                                    
-                                        <a href="/tags/#JVM" title="JVM"
-                                            rel="4">
-                                            JVM
-                                        </a>
-                                        
-                                            
-                                    
                                         <a href="/tags/#算法" title="算法"
                                             rel="2">
                                             算法
                                         </a>
                                         
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
                                             
                                     
                                         <a href="/tags/#Java集合" title="Java集合"
@@ -549,6 +550,11 @@ id：SQ......
                                         
                                             
                                     
+                                        <a href="/tags/#JVM" title="JVM"
+                                            rel="4">
+                                            JVM
+                                        </a>
+                                        
                                             
                                     
                                         <a href="/tags/#Java并发" title="Java并发"
@@ -558,16 +564,20 @@ id：SQ......
                                         
                                             
                                     
-                                        <a href="/tags/#Mysql" title="Mysql"
-                                            rel="5">
-                                            Mysql
-                                        </a>
-                                        
+                                            
+                                    
                                             
                                     
                                         <a href="/tags/#Redis" title="Redis"
                                             rel="8">
                                             Redis
+                                        </a>
+                                        
+                                            
+                                    
+                                        <a href="/tags/#Mysql" title="Mysql"
+                                            rel="5">
+                                            Mysql
                                         </a>
                                         
                                             
@@ -586,13 +596,6 @@ id：SQ......
                                         
                                             
                                     
-                                        <a href="/tags/#tomcat" title="tomcat"
-                                            rel="2">
-                                            tomcat
-                                        </a>
-                                        
-                                            
-                                    
                                         <a href="/tags/#Spring boot" title="Spring boot"
                                             rel="6">
                                             Spring boot
@@ -600,13 +603,11 @@ id：SQ......
                                         
                                             
                                     
-                                        <a href="/tags/#Spring AOP" title="Spring AOP"
+                                        <a href="/tags/#tomcat" title="tomcat"
                                             rel="2">
-                                            Spring AOP
+                                            tomcat
                                         </a>
                                         
-                                            
-                                    
                                             
                                     
                                         <a href="/tags/#Spring Cloud" title="Spring Cloud"
@@ -618,8 +619,11 @@ id：SQ......
                                     
                                             
                                     
-                                            
-                                    
+                                        <a href="/tags/#Spring AOP" title="Spring AOP"
+                                            rel="2">
+                                            Spring AOP
+                                        </a>
+                                        
                                             
                             </div>
                         </section>

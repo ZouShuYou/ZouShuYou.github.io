@@ -98,16 +98,16 @@
                     
                         
                             <li>
-                                <a href="/archives/">
-                                    Archives
+                                <a href="/tags/">
+                                    Tags
                                 </a>
                             </li>
                         
                     
                         
                             <li>
-                                <a href="/tags/">
-                                    Tags
+                                <a href="/archives/">
+                                    Archives
                                 </a>
                             </li>
                         
@@ -215,7 +215,11 @@
 <li>cookie是不可跨域的： 每个 cookie 都会绑定单一的域名，无法在别的域名下获取使用，一级域名和二级域名之间是允许共享使用的（靠的是 domain）。</li>
 </ul>
 <p>在servlet中使用cookie</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">response.setContentType(<span class="string">&quot;text/html;charset=UTF-8&quot;</span>);</span><br><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">&quot;user&quot;</span>,<span class="string">&quot;zsy&quot;</span>);</span><br><span class="line">cookie.setMaxAge(<span class="number">30000</span>);</span><br><span class="line">response.addCookie(cookie);</span><br><span class="line">response.getWriter().write(<span class="string">&quot;返回Cookie&quot;</span>);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">response<span class="token punctuation">.</span><span class="token function">setContentType</span><span class="token punctuation">(</span><span class="token string">"text/html;charset=UTF-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Cookie</span> cookie <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cookie</span><span class="token punctuation">(</span><span class="token string">"user"</span><span class="token punctuation">,</span><span class="token string">"zsy"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cookie<span class="token punctuation">.</span><span class="token function">setMaxAge</span><span class="token punctuation">(</span><span class="token number">30000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+response<span class="token punctuation">.</span><span class="token function">addCookie</span><span class="token punctuation">(</span>cookie<span class="token punctuation">)</span><span class="token punctuation">;</span>
+response<span class="token punctuation">.</span><span class="token function">getWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token string">"返回Cookie"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>什么是Session</strong></p>
 <p>Session 是另⼀种记录浏览器状态的机制。Cookie保存在浏览器中， 而Session保存在服务器中。⽤户使⽤浏览器访问服务器的时候，服务器把⽤户的信息以某种的形式记录在服务器，这就是Session。</p>
@@ -226,7 +230,14 @@
 <li>Cookie 可设置为长时间保持，比如我们经常使用的默认登录功能，Session 一般失效时间较短，客户端关闭（默认情况下）或者 Session 超时都会失效</li>
 </ul>
 <p>在servlet中使用session</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//得到Session对象</span></span><br><span class="line">HttpSession httpSession = request.getSession();</span><br><span class="line"><span class="comment">//设置Session属性</span></span><br><span class="line">httpSession.setAttribute(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;看完博客就要点赞！！ &quot;</span>);</span><br><span class="line"><span class="comment">//得到Session对象</span></span><br><span class="line">HttpSession httpSession = request.getSession();</span><br><span class="line"><span class="comment">//设置Session属性</span></span><br><span class="line">httpSession.setAttribute(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;看完博客就要点赞！！ &quot;</span>);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//得到Session对象</span>
+<span class="token class-name">HttpSession</span> httpSession <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getSession</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//设置Session属性</span>
+httpSession<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">,</span> <span class="token string">"看完博客就要点赞！！ "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//得到Session对象</span>
+<span class="token class-name">HttpSession</span> httpSession <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getSession</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//设置Session属性</span>
+httpSession<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">,</span> <span class="token string">"看完博客就要点赞！！ "</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>什么是Token</strong></p>
 <p>token是访问资源接口（API）时所需要的资源凭证</p>
@@ -340,7 +351,7 @@
 
                     Theme by <a target="_blank" rel="noopener" href="http://huangxuan.me">Hux</a> |                        
                     Power by <a href="https://shuyou.site">ShuYou</a> <br>
-                    Copyright &copy; ShuYou&#39;s Blog 2021 |
+                    Copyright &copy; ShuYou&#39;s Blog 2022 |
                     <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">鄂ICP备2020016977号-1</a>
                     
                 </p>

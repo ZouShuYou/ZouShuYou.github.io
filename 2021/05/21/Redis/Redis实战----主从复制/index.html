@@ -95,19 +95,19 @@
                         
                     
                         
-                            <li>
-                                <a href="/archives/">
-                                    Archives
-                                </a>
-                            </li>
-                        
-                    
-                        
                     
                         
                             <li>
                                 <a href="/tags/">
                                     Tags
+                                </a>
+                            </li>
+                        
+                    
+                        
+                            <li>
+                                <a href="/archives/">
+                                    Archives
                                 </a>
                             </li>
                         
@@ -210,11 +210,54 @@
 <p>这里使用 docker-compose 来测试 Redis 的主从复制功能。</p>
 <p>首先需要安装 docker 和 docker-compose 以及 Redis 镜像，这里就不再做这方面的安装介绍了。</p>
 <p>安装好后，需要编写 docker-compose.yml 文件</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">master:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">redis-master</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">redis-server</span> <span class="string">--port</span> <span class="number">6379</span> <span class="string">--requirepass</span> <span class="string">master123</span>  <span class="string">--appendonly</span> <span class="literal">yes</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">6379</span><span class="string">:6379</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data/master:/data</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">slave1:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">redis-slave-1</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">redis-server</span> <span class="string">--slaveof</span> <span class="string">master</span> <span class="number">6379</span> <span class="string">--port</span> <span class="number">6380</span>  <span class="string">--requirepass</span> <span class="string">slave123</span> <span class="string">--masterauth</span> <span class="string">master123</span>  <span class="string">--appendonly</span> <span class="literal">yes</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">6380</span><span class="string">:6380</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data/slave1:/data</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="attr">slave2:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">redis-slave-2</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">redis-server</span> <span class="string">--slaveof</span> <span class="string">master</span> <span class="number">6379</span> <span class="string">--port</span> <span class="number">6381</span>  <span class="string">--requirepass</span> <span class="string">slave456</span> <span class="string">--masterauth</span> <span class="string">master123</span>  <span class="string">--appendonly</span> <span class="literal">yes</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">6381</span><span class="string">:6381</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data/slave2:/data</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">master</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>master
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>server <span class="token punctuation">-</span><span class="token punctuation">-</span>port 6379 <span class="token punctuation">-</span><span class="token punctuation">-</span>requirepass master123  <span class="token punctuation">-</span><span class="token punctuation">-</span>appendonly yes
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 6379<span class="token punctuation">:</span><span class="token number">6379</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./data/master<span class="token punctuation">:</span>/data
+
+  <span class="token key atrule">slave1</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>slave<span class="token punctuation">-</span><span class="token number">1</span>
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>server <span class="token punctuation">-</span><span class="token punctuation">-</span>slaveof master 6379 <span class="token punctuation">-</span><span class="token punctuation">-</span>port 6380  <span class="token punctuation">-</span><span class="token punctuation">-</span>requirepass slave123 <span class="token punctuation">-</span><span class="token punctuation">-</span>masterauth master123  <span class="token punctuation">-</span><span class="token punctuation">-</span>appendonly yes
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 6380<span class="token punctuation">:</span><span class="token number">6380</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./data/slave1<span class="token punctuation">:</span>/data
+
+
+  <span class="token key atrule">slave2</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>slave<span class="token punctuation">-</span><span class="token number">2</span>
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>server <span class="token punctuation">-</span><span class="token punctuation">-</span>slaveof master 6379 <span class="token punctuation">-</span><span class="token punctuation">-</span>port 6381  <span class="token punctuation">-</span><span class="token punctuation">-</span>requirepass slave456 <span class="token punctuation">-</span><span class="token punctuation">-</span>masterauth master123  <span class="token punctuation">-</span><span class="token punctuation">-</span>appendonly yes
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 6381<span class="token punctuation">:</span><span class="token number">6381</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./data/slave2<span class="token punctuation">:</span>/data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>然后在当前文件夹下，输入命令:   docker-compose up -d</p>
 <p>运行结果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">zsy@zsy:~/redis/testSlave$ ll</span><br><span class="line">total 16</span><br><span class="line">drwxr-xr-x 3 zsy  zsy  4096 Oct 21 11:17 ./</span><br><span class="line">drwxr-xr-x 4 zsy  zsy  4096 Oct 21 11:07 ../</span><br><span class="line">drwxr-xr-x 5 root root 4096 Oct 21 11:17 data/</span><br><span class="line">-rw-r--r-- 1 zsy  zsy  1112 Oct 21 11:17 docker-compose.yml</span><br><span class="line">zsy@zsy:~/redis/testSlave$ docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE     COMMAND                  CREATED       STATUS          PORTS                              NAMES</span><br><span class="line">20adf82b1afd   redis     <span class="string">&quot;docker-entrypoint.s…&quot;</span>   3 hours ago   Up 3 hours      0.0.0.0:6379-&gt;6379/tcp             redis-master</span><br><span class="line">6ba1c3c93d2e   redis     <span class="string">&quot;docker-entrypoint.s…&quot;</span>   3 hours ago   Up 3 hours      6379/tcp, 0.0.0.0:6381-&gt;6381/tcp   redis-slave-2</span><br><span class="line">96b023c4bc57   redis     <span class="string">&quot;docker-entrypoint.s…&quot;</span>   3 hours ago   Up 15 minutes   6379/tcp, 0.0.0.0:6380-&gt;6380/tcp   redis-slave-1</span><br><span class="line">zsy@zsy:~/redis/testSlave$</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">zsy@zsy:~/redis/testSlave$ ll
+total <span class="token number">16</span>
+drwxr-xr-x <span class="token number">3</span> zsy  zsy  <span class="token number">4096</span> Oct <span class="token number">21</span> <span class="token number">11</span>:17 ./
+drwxr-xr-x <span class="token number">4</span> zsy  zsy  <span class="token number">4096</span> Oct <span class="token number">21</span> <span class="token number">11</span>:07 <span class="token punctuation">..</span>/
+drwxr-xr-x <span class="token number">5</span> root root <span class="token number">4096</span> Oct <span class="token number">21</span> <span class="token number">11</span>:17 data/
+-rw-r--r-- <span class="token number">1</span> zsy  zsy  <span class="token number">1112</span> Oct <span class="token number">21</span> <span class="token number">11</span>:17 docker-compose.yml
+zsy@zsy:~/redis/testSlave$ docker <span class="token function">ps</span> -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED       STATUS          PORTS                              NAMES
+20adf82b1afd   redis     <span class="token string">"docker-entrypoint.s…"</span>   <span class="token number">3</span> hours ago   Up <span class="token number">3</span> hours      <span class="token number">0.0</span>.0.0:6379-<span class="token operator">></span><span class="token number">6379</span>/tcp             redis-master
+6ba1c3c93d2e   redis     <span class="token string">"docker-entrypoint.s…"</span>   <span class="token number">3</span> hours ago   Up <span class="token number">3</span> hours      <span class="token number">6379</span>/tcp, <span class="token number">0.0</span>.0.0:6381-<span class="token operator">></span><span class="token number">6381</span>/tcp   redis-slave-2
+96b023c4bc57   redis     <span class="token string">"docker-entrypoint.s…"</span>   <span class="token number">3</span> hours ago   Up <span class="token number">15</span> minutes   <span class="token number">6379</span>/tcp, <span class="token number">0.0</span>.0.0:6380-<span class="token operator">></span><span class="token number">6380</span>/tcp   redis-slave-1
+zsy@zsy:~/redis/testSlave$
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>测试主从复制</strong>：</p>
 <ol>
@@ -336,7 +379,7 @@
 
                     Theme by <a target="_blank" rel="noopener" href="http://huangxuan.me">Hux</a> |                        
                     Power by <a href="https://shuyou.site">ShuYou</a> <br>
-                    Copyright &copy; ShuYou&#39;s Blog 2021 |
+                    Copyright &copy; ShuYou&#39;s Blog 2022 |
                     <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">鄂ICP备2020016977号-1</a>
                     
                 </p>
